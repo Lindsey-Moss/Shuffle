@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     deckName: DataTypes.STRING,
+    backImage: DataTypes.STRING,
+    backImgInv: DataTypes.STRING,
     deckArtist: DataTypes.STRING,
     deckDetails: DataTypes.TEXT
   }, {

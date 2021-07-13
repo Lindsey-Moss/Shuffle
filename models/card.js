@@ -26,8 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     cardName: DataTypes.STRING,
     frontImage: DataTypes.STRING,
     frontImageInv: DataTypes.STRING,
-    backImage: DataTypes.STRING,
-    backImgInv: DataTypes.STRING,
     cardArtist: DataTypes.STRING,
     cardDefinition: DataTypes.STRING,
     cardDetails: DataTypes.TEXT
