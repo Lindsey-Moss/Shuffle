@@ -4,11 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Entry extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
       // define association here
       Entry.belongsTo(models.User, {foreignKey: 'userID'})
@@ -27,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     read: DataTypes.ARRAY(DataTypes.TEXT),
     entryTitle: DataTypes.STRING,
     entryBody: DataTypes.TEXT,
-    entryIcon: DataTypes.STRING
+    entryIcon: DataTypes.STRING,
+    inJournal: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Entry',
