@@ -23,8 +23,7 @@ const Login = async (req, res) => {
       (await middleware.comparePassword(req.body.password, user.password))
     ) {
       let payload = {
-        id: user.id,
-        userName: user.userName
+        id: user.userID
       }
       let token = middleware.createToken(payload)
       return res.send({ user: payload, token })
@@ -35,7 +34,17 @@ const Login = async (req, res) => {
   }
 }
 
+const CheckLogin = async (req,res) => {
+  try {
+    const { payload } = res.locals
+    res.send(payload)
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   Register,
-  Login
+  Login,
+  CheckLogin
 }

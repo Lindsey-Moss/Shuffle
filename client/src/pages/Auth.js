@@ -1,14 +1,115 @@
-import React from 'react'
-import LoginForm from '../components/LoginForm'
-import SignUpForm from '../components/SignUpForm'
+import React, { useState } from 'react'
+import {connect } from 'react-redux'
+import {
+  SignIn, 
+  AuthFormField,
+  Register
+} from '../store/actions/AuthActions'
+
+const mapStateToProps = ({authState}) => {
+  return {authState}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAuthForm: (formName, formValue) => dispatch(AuthFormField(formName, formValue)),
+    setLogin: (authForm) => dispatch(SignIn(authForm)), 
+    setRegister: (authForm) => dispatch(Register(authForm))
+  }
+}
 
 const Auth = (props) => {
-  
+  const [isRegister, setForm] = useState(true)
+
+  const handleChange =(e) => {
+    props.setAuthForm(e.target.name, e.target.value)
+  }
+
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault()
+    const authForm = {
+      userName: props.authState.userName,
+      password: props.authState.password
+    }
+    try {
+      await props.setLogin(authForm)
+      props.history.push('/')
+    } catch (error) {
+      return alert('Your username or password is incorrect')
+    }
+  }
+
+  const handleSubmitRegister=(e) => {
+    e.preventDefault()
+    props.setRegister({
+      email: props.authState.email,
+      userName: props.authState.userName, 
+      preferredName: props.authState.preferredName, 
+      password: props.authState.password,
+      zipCode: props.authState.zipCode
+    })
+    window.location.reload()
+  }
 
   return (
-    <div className="auth-page">
-     This is the login or signup page
+    <>
+    {props.authState.isAuthenticated ? (props.history.push('/')) :(
+    
+        <div className="auth-page">
+      <button onClick={()=>{setForm(false)}}>Log In</button> or <button onClick={()=>{setForm(true)}}>Sign Up</button>
+     <form className="auth-form">
+       {isRegister ? (<input
+          type="email"
+          name="email"
+          value={props.authState.email}
+          onChange={handleChange}
+          placeholder="email address"
+          required
+       />) : (null)}
+       <input
+          type="username"
+          name="userName"
+          value={props.authState.username}
+          onChange={handleChange}
+          placeholder="username"
+          required
+       />
+       {isRegister ? (<input
+          type="text"
+          name="preferredName"
+          value={props.authState.preferredName}
+          onChange={handleChange}
+          placeholder="your preferred name"
+       />) : (null)}
+       <input
+          type="password"
+          name="password"
+          value={props.authState.password}
+          onChange={handleChange}
+          placeholder="password"
+          required
+       />
+       {isRegister ? (<input
+          type="number"
+          maxlength="5"
+          name="zipCode"
+          value={props.authState.zipCode}
+          onChange={handleChange}
+          placeholder="zip code"
+       />) : (null)}
+        {isRegister ? (
+          <button onClick={handleSubmitRegister}>
+            Submit
+          </button>
+        ) : (
+          <button onClick={handleSubmitLogin}>
+            Log In
+          </button>
+        )}
+     </form>
     </div>
+      )}
+      </>
   )
 }
-export default Auth
+export default connect(mapStateToProps, mapDispatchToProps) (Auth)

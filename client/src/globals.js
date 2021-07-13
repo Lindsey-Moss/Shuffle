@@ -1,14 +1,14 @@
-// import Axios from 'axios'
+import Axios from 'axios'
 
-// Axios.interceptors.request.use(
-//   (config) => {
-//     let token = localStorage.getItem('token')
-//     if (token) {
-//       config.headers['Authorization'] = `Bearer ${token}`
-//     }
-//     return config
-//   },
-//   (error) => Promise.reject(error)
-// )
+Axios.interceptors.request.use(
+  (config) => {
+    let token = localStorage.getItem('token')
+    if (token) {
+      config.headers['authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
 
-export const BASE_URL = 'http://localhost:3001/api/'
+export const BASE_URL = process.env.NODE_ENV === 'production' ? `${window.location.origin}/api` : 'http://localhost:3001/api/'
