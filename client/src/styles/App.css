@@ -2,3 +2,47 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/*////////////////////////////*/
+/* ---------- PAGES ----------*/
+/*////////////////////////////*/
+
+.leave-room-for-jesus-i-mean-navbar {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  padding: 1em;
+}
+
+/* ---- HOMEPAGE ---- */
+
+.homepage {
+  height: 100vh;
+  background-color: rosybrown;
+
+}
+
+/* */
+
+/*////////////////////////////*/
+/*-------- COMPONENTS --------*/
+/*////////////////////////////*/
+
+
+/* ---- NAVIGATION ---- */
+
+.navbar {
+  z-index: 10;
+  height: 100%;
+  opacity: 1;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  background-color: thistle;
+  width: 180px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1em 0em;
+}
+
+/* */

@@ -5,15 +5,15 @@ const mapStateToProps = ({ authState }) => {
   return { authState }
 }
 
-const Home = (props) => {
+const Profile = (props) => {
   useEffect(() => {
     props.getToken()
   }, [])
   return (
-    <div className="homepage leave-room-for-jesus-i-mean-navbar">
+    <div className="profile-page">
       <div>{/*spacer for navbar*/}</div>
-     This is the homepage
+     This is your profile
     </div>
   )
 }
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(Profile)

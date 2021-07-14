@@ -4,9 +4,11 @@ import { Route, Switch, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Home from './pages/Home';
 import Auth from './pages/Auth';
+import Profile from './pages/Profile'
 import axios from 'axios';
 import { BASE_URL } from './globals';
 import { SessionChecked, SetUser } from './store/actions/AuthActions';
+import Nav from './components/Nav';
 
 const mapStateToProps = ({ authState }) => {
   return { authState }
@@ -43,22 +45,34 @@ function App(props) {
   }, [props.authState.isAuthenticated])
 
   return (
+    <>
+    <Nav {...props} 
+      history={history} 
+      getToken={getToken}
+      logOut={logOut}
+    />
     <Switch>
       <div className="App">
 
         <Route exact path ="/" render={(props) => (
             <Home {...props} 
-              history={history}
+              // history={history}
               getToken={getToken}
-              logOut={logOut}
+              // logOut={logOut}
             />
           )}
         />
         <Route path="/auth/" component={Auth} />
-
+        <Route path="/profile" render={(props) => (
+          <Profile {...props}
+            history={history}
+            getToken={getToken}/>
+          )}
+        />
 
       </div>
     </Switch>
+    </>
   );
 }
 
