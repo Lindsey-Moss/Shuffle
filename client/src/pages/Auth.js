@@ -48,7 +48,7 @@ const Auth = (props) => {
     }
     try {
       await props.setLogin(authForm)
-      props.history.push('/')
+      window.location.assign('/')
     } catch (error) {
       return alert('Your username or password is incorrect')
     }

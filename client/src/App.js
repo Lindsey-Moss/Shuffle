@@ -48,7 +48,6 @@ function App(props) {
     <>
     <Nav {...props} 
       history={history} 
-      getToken={getToken}
       logOut={logOut}
     />
     <Switch>
@@ -57,13 +56,12 @@ function App(props) {
         <Route exact path ="/" render={(props) => (
             <Home {...props} 
               // history={history}
-              getToken={getToken}
               // logOut={logOut}
             />
           )}
         />
         <Route path="/auth/" component={Auth} />
-        <Route path="/profile" render={(props) => (
+        <Route exact path="/profile" render={(props) => (
           <Profile {...props}
             history={history}
             getToken={getToken}/>

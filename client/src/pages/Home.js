@@ -6,9 +6,7 @@ const mapStateToProps = ({ authState }) => {
 }
 
 const Home = (props) => {
-  useEffect(() => {
-    props.getToken()
-  }, [])
+
   return (
     <div className="homepage leave-room-for-jesus-i-mean-navbar">
       <div>{/*spacer for navbar*/}</div>

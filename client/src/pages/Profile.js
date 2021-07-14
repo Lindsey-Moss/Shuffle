@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 const mapStateToProps = ({ authState }) => {
@@ -6,14 +6,21 @@ const mapStateToProps = ({ authState }) => {
 }
 
 const Profile = (props) => {
-  useEffect(() => {
-    props.getToken()
-  }, [])
+
   return (
-    <div className="profile-page">
-      <div>{/*spacer for navbar*/}</div>
-     This is your profile
-    </div>
+    <>
+      {props.authState.isAuthenticated ? (
+        <div className="profile-page leave-room-for-jesus-i-mean-navbar">
+          <div>{/*spacer for navbar*/}</div>
+      
+          This is your profile
+
+        </div>
+        
+      ) : (
+        props.history.push('/auth/query')
+      )}
+    </>
   )
 }
 export default connect(mapStateToProps)(Profile)

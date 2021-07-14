@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 const mapStateToProps = ({ authState }) => {
@@ -7,39 +7,40 @@ const mapStateToProps = ({ authState }) => {
 
 const Nav = (props) => {
   //// LOCAL STATE ////
-  const [path, setPath] = useState(null)
+  const [onAuth, setAuth] = useState(null)
+  const [onProfile, setProfile] = useState(null)
   ////
 
-  const checkPath = () => {
-    if ((window.location.pathname).includes('auth')) {
-      return setPath(true)
-    } else {
-      return setPath(false)
-    }
+  const checkPathForAuth = () => {
+    ((window.location.pathname).includes('auth')) ? (setAuth(true)) : (setAuth(false))
   }
 
-  useEffect(() => {
-    props.getToken()
-  }, [])
-
-  console.log(window.location.pathname)
+  const checkPathForProfile = () => {
+    ((window.location.pathname).includes('profile')) ? (setProfile(true)) : (setProfile(false))
+  }
 
   return (
     <div className="navbar">
-      This is the navbar
+      <img
+        className="navbar-logo"
+        onClick={ () => { { props.history.push('/'); checkPathForAuth(); checkPathForProfile() } } }
+        src="https://freesvg.org/img/Placeholder.png"
+        alt="this is where i'd put a logo... if i had one!" />
       { (props.authState.isAuthenticated) ? (
         <>
-          <button onClick={ () => { props.history.push('/profile') } }>Profile</button>
+          { onProfile ? (null) : (
+            <button onClick={ () => { { props.history.push('/profile'); checkPathForProfile() } } }>Profile</button>
+          ) }
           <button onClick={ props.logOut }>Log Out</button>
         </>
       ) : (
         <>
-          { path ? (null) : (
+          { onAuth ? (null) : (
             <>
-              <button onClick={ () => { { props.history.push('/auth/query'); checkPath() } } }>
+              <button onClick={ () => { { props.history.push('/auth/query'); checkPathForAuth() } } }>
                 Log In
               </button>
-              <button onClick={ () => { { props.history.push('/auth?'); checkPath() } } }>
+              <button onClick={ () => { { props.history.push('/auth?'); checkPathForAuth() } } }>
                 Sign Up
               </button>
             </>
