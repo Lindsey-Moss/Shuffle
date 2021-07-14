@@ -21,7 +21,7 @@ export const Register = (authForm) => async (dispatch) => {
     const register = await SignUp(authForm)
     dispatch({
       type: REGISTER,
-      payload: register
+      payload: register.userName
     })
   } catch (error) {
     throw error

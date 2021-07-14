@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {connect } from 'react-redux'
 import {
   SignIn, 
@@ -19,10 +19,26 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Auth = (props) => {
-  const [isRegister, setForm] = useState(true)
+  
+  const checkPath = () => {
+    if ((window.location.pathname).replace('/auth','') === '/query') {
+      console.log(props.authState.userName)
+      return false
+    } else {
+      return true
+    }
+  }
 
-  const handleChange =(e) => {
+  const [isRegister, setForm] = useState(checkPath())
+  const [zodiacChoice, setChoice] = useState(null)
+
+  const handleChange = (e) => {
     props.setAuthForm(e.target.name, e.target.value)
+  }
+
+  const handleOptionChange = (e) => {
+    setChoice(e.target.value)
+    console.log(zodiacChoice)
   }
 
   const handleSubmitLogin = async (e) => {
@@ -46,16 +62,20 @@ const Auth = (props) => {
       userName: props.authState.userName, 
       preferredName: props.authState.preferredName, 
       password: props.authState.password,
-      zipCode: props.authState.zipCode
+      zipCode: props.authState.zipCode,
+      zodiac: zodiacChoice
     })
-    window.location.reload()
+    window.location.assign('/auth/query')
   }
+
+  useEffect(() => {
+    setForm(checkPath())
+  }, [])
 
   return (
     <>
-    {props.authState.isAuthenticated ? (props.history.push('/')) :(
-    
-        <div className="auth-page">
+    {props.authState.isAuthenticated ? (props.history.push('/')) : (
+      <div className="auth-page">
       <button onClick={()=>{setForm(false)}}>Log In</button> or <button onClick={()=>{setForm(true)}}>Sign Up</button>
      <form className="auth-form">
        {isRegister ? (<input
@@ -91,12 +111,35 @@ const Auth = (props) => {
        />
        {isRegister ? (<input
           type="number"
-          maxlength="5"
+          onInput={(e)=>{ 
+            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,5)
+        }}
           name="zipCode"
           value={props.authState.zipCode}
           onChange={handleChange}
           placeholder="zip code"
        />) : (null)}
+       {isRegister ? (
+          <select name="zodiac"
+            defaultValue={zodiacChoice}
+            onChange={handleOptionChange}
+          >
+            <option></option>
+            <option value="Aquarius">Aquarius</option>
+            <option value="Pisces">Pisces</option>
+            <option value="Aries">Aries</option>
+            <option value="Taurus">Taurus</option>
+            <option value="Gemini">Gemini</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Leo">Leo</option>
+            <option value="Virgo">Virgo</option>
+            <option value="Libra">Libra</option>
+            <option value="Scorpio">Scorpio</option>
+            <option value="Sagittarius">Sagittarius</option>
+            <option value="Capricorn">Capricorn</option>
+            <option value="Don't know/Don't care">Don't know/Don't care</option>
+          </select>
+       ) : (null)}
         {isRegister ? (
           <button onClick={handleSubmitRegister}>
             Submit

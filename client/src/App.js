@@ -40,7 +40,7 @@ function App(props) {
 
   useEffect(() => {
     getToken()
-  }, [])
+  }, [props.authState.isAuthenticated])
 
   return (
     <Switch>
@@ -54,7 +54,7 @@ function App(props) {
             />
           )}
         />
-        <Route path="/auth" component={Auth} />
+        <Route path="/auth/" component={Auth} />
 
 
       </div>
