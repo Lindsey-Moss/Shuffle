@@ -11,21 +11,72 @@ button {
 /* ---------- PAGES ----------*/
 /*////////////////////////////*/
 
+
+/* ---- PAGE GLOBALS ---- */
+
 .leave-room-for-jesus-i-mean-navbar {
   display: grid;
   grid-template-columns: 180px 1fr;
   padding: 1em;
 }
 
+.openbtn {
+  position: absolute;
+  z-index: 1;
+  top: 6.9vmin;
+  left: 0;
+  border:none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.5em;
+  background: thistle;
+  padding: 6px 14px;
+  vertical-align: middle;
+  transition: color 0.25s;
+}
+
+.openbtn:hover {
+  color: white;
+}
+
+/* */
+
 /* ---- HOMEPAGE ---- */
 
 .homepage {
   height: 100vh;
   background-color: rosybrown;
+}
+
+.dashboard {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content:flex-start;
+  align-items: flex-start;
+}
+
+/* */
+
+/* -- AUTH (LOGIN & SIGNUP) -- */
+
+.auth-page {
+  height: 100vh;
+  background-color: yellowgreen;
 
 }
 
 /* */
+
+/* ---- PROFILE ---- */
+
+.auth-page {
+  height: 100vh;
+  background-color: yellowgreen;
+
+}
+
+/* */
+
 
 /*////////////////////////////*/
 /*-------- COMPONENTS --------*/
@@ -48,10 +99,33 @@ button {
   left: 0;
   padding: 1em 0em;
 }
+
 .navbar-logo {
   width: 100px;
+  margin:1.5em 0em;
   padding: 1em;
   cursor: pointer;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: black;
+  border:none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.closebtn:hover {
+  color: white;
+}
+
+.navbar-btn {
+  margin: 1em 0;
 }
 
 /* */
