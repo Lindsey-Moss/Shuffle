@@ -91,6 +91,14 @@ form {
   display: none
 }
 
+/* */
+
+/* ---- DAILY DRAW ---- */
+
+.read-reveal {
+  display: none
+}
+
 
 /*////////////////////////////*/
 /*-------- COMPONENTS --------*/

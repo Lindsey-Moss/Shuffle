@@ -18,6 +18,9 @@ export const ALL_DECKS = 'ALL_DECKS'
 export const CURRENT_DECK = 'CURRENT_DECK'
 export const NEW_DAILY = 'NEW_DAILY'
 export const NEW_READ = 'NEW_READ'
+export const DAILY_DECK = 'DAILY_DECK'
+export const RESET_READ = 'RESET_READ'
+
 
 //// USER
 

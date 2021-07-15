@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {
   GetDaily,
   LoadAllDecks,
-  LoadCurrentDeck
+  LoadDailyDeck
 } from '../store/actions/TarotActions'
 import {
   SetReadInfo
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setDaily: () => dispatch(GetDaily()),
     fetchDecks: () => dispatch(LoadAllDecks()),
-    setDeck: (deckID) => dispatch(LoadCurrentDeck(deckID)),
+    setDeck: (deckID) => dispatch(LoadDailyDeck(deckID)),
     setReadForJournal: (read)=> dispatch(SetReadInfo(read)),
     setFrom: (string) => dispatch(SetFrom(string))
   }
@@ -59,13 +59,13 @@ const DailyDraw = (props) => {
       <main className="dailydraw-main">
       This is where you can get your daily draw! Only once a day tho
 
-      {(props.tarotState.thisDeck) ? (null):(
+      {(props.tarotState.dailyDeck) ? (null):(
         props.tarotState.allDecks.map((deck) => {
           return <DeckSummary deck={deck} setDeck={props.setDeck} key={deck.deckID}/>
         })
       )}
 
-      {(props.tarotState.thisDeck &&!(props.tarotState.theDaily)) ? (
+      {(props.tarotState.dailyDeck &&!(props.tarotState.theDaily)) ? (
         <button className="shufflebtn" onClick={()=>{props.setDaily()}}>Shuffle the Deck</button>
         ):(null)}
 
@@ -78,7 +78,7 @@ const DailyDraw = (props) => {
         <img src={(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.frontImage):(props.tarotState.theDaily.frontImageInv)} alt={props.tarotState.cardName}/>
         <h3>{props.tarotState.theDaily.cardName}{(props.tarotState.dailyCardUpright) ? (null):(<span style={{fontStyle:"italic"}}> - Inverted</span>)}</h3>
         <p>{props.tarotState.theDaily.cardDefinition}</p>
-      <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
+        <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
       </div>
       ):(null)}
       

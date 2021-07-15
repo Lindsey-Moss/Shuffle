@@ -3,7 +3,9 @@ import {
   ALL_DECKS,
   CURRENT_DECK,
   NEW_DAILY,
-  NEW_READ
+  NEW_READ,
+  DAILY_DECK,
+  RESET_READ
 } from '../types'
 
 export const GetDaily = () => ({
@@ -12,7 +14,11 @@ export const GetDaily = () => ({
 
 export const GetRead = (numberOfCards) => ({
   type: NEW_READ,
-  payload: numberOfCards
+  payload: parseInt(numberOfCards)
+})
+
+export const ResetRead = () => ({
+  type: RESET_READ
 })
 
 export const LoadAllDecks = () => {
@@ -35,6 +41,20 @@ export const LoadCurrentDeck = (deckID) => {
       const res = await GetCardsByDeckID(deckID)
       dispatch({
         type: CURRENT_DECK,
+        payload: res
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+export const LoadDailyDeck = (deckID) => {
+  return async (dispatch) => {
+    try {
+      const res = await GetCardsByDeckID(deckID)
+      dispatch({
+        type: DAILY_DECK,
         payload: res
       })
     } catch (error) {

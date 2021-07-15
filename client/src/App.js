@@ -55,8 +55,7 @@ function App(props) {
 
   useEffect(() => {
     getToken()
-    // eslint-disable-next-line
-  }, [props.authState.isAuthenticated])
+  }, [])
 
   return (
     <>
@@ -99,6 +98,7 @@ function App(props) {
 
         <Route exact path="/journal/new" render={(props) => (
           <NewEntry {...props}
+            history={history}
           />
           )} 
         />

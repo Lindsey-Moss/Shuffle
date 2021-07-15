@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import {
   EntryFormField,
@@ -24,11 +24,11 @@ const NewEntry = (props) => {
   const checkRead = () => {
     props.journalState.read.map((index)=>{
       if(index.position){
-        legible += `${index.name}, `
+        return legible += `${index.name}, `
       }else{
-        legible+= `${index.name} - inverted, `
+        return legible+= `${index.name} - inverted, `
       }})
-      legible= legible.substring(0,(legible.length-2))
+      return legible= legible.substring(0,(legible.length-2))
   }
 
   const handleChange = (e) => {
@@ -41,15 +41,15 @@ const NewEntry = (props) => {
     e.preventDefault()
     const entryForm = {
       userID: props.authState.thisUser,
-      read: legible,
+      read: legible.split(', '),
       entryTitle: props.journalState.entryTitle,
       entryBody: props.journalState.entryBody,
       entryIcon: props.journalState.entryIcon,
       inJournal: 1
     }
-    console.log(entryForm)
     try {
       await props.submitEntry(props.authState.thisUser,entryForm)
+      props.history.push('/journal')
     } catch (error) {
       return alert('The entry failed to save. Please wait a moment and try again.')
     }
@@ -59,7 +59,6 @@ const NewEntry = (props) => {
 
   return (
     <div className="newentry-page leave-room-for-jesus-i-mean-navbar">
-      {checkRead()}
       <div>{/*spacer for navbar*/}</div>
       <main>
       This is where you can make a new journal entry
@@ -69,7 +68,7 @@ const NewEntry = (props) => {
             <input
               type="text"
               name="read"
-              value={legible}
+              value={checkRead()}
               readOnly
             />):(
               null
