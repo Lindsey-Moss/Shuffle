@@ -1,6 +1,15 @@
 const { Op } = require('sequelize')
 const { Entry } = require('../models')
 
+const GetAllEntriesEver = async (req, res) => {
+  try {
+    let journal = await Entry.findAll()
+    res.send(journal)
+  } catch (error) {
+    throw error
+  }
+}
+
 const GetAllEntriesForUser = async (req, res) => {
   try {
     let userID = req.params.userID
@@ -107,6 +116,7 @@ const DeleteEntry = async (req, res) => {
 
 
   module.exports = {
+    GetAllEntriesEver,
     GetAllEntriesForUser,
     GetEntriesByIcon,
     GetEntriesByFilter,
