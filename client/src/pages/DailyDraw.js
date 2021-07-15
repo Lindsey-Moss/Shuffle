@@ -56,15 +56,15 @@ const DailyDraw = (props) => {
 
       {(props.tarotState.thisDeck) ? (null):(
         props.tarotState.allDecks.map((deck) => {
-          return <DeckSummary deck={deck} setDeck={props.setDeck} />
+          return <DeckSummary deck={deck} setDeck={props.setDeck} key={deck.deckID}/>
         })
       )}
 
       {(props.tarotState.thisDeck &&!(props.tarotState.theDaily)) ? (
         <button className="shufflebtn" onClick={()=>{props.setDaily()}}>Shuffle the Deck</button>
-        ):(<button onClick={()=>{showCard()}}>Show My Card</button>)}
+        ):(null)}
 
-
+      {(props.tarotState.theDaily) ? (<button onClick={()=>{showCard()}}>Show My Card</button>):(null)}
 
       
 

@@ -10,8 +10,8 @@ import {
 const iState = {
   viewingEntries: [],
   read: null,
-  entryTitle: null,
-  entryBody: null,
+  entryTitle: '',
+  entryBody: '',
   entryIcon: null
 }
 

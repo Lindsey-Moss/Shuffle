@@ -76,6 +76,7 @@ export const PostNewEntryAction = (userID, entryForm) => {
         type: POST_ENTRY,
         payload: posted
       })
+      console.log(posted)
     } catch (error) {
       throw error
     }

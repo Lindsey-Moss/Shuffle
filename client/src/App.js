@@ -67,8 +67,8 @@ function App(props) {
         logOut={logOut}
       />
     </nav>
-    <Switch>
       <div className="App">
+    <Switch>
 
         <Route exact path ="/" render={(props) => (
             <Home {...props} 
@@ -103,8 +103,8 @@ function App(props) {
           )} 
         />
 
-      </div>
     </Switch>
+      </div>
     </>
   );
 }

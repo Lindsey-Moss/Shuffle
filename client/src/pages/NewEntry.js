@@ -5,8 +5,8 @@ import {
   PostNewEntryAction
 } from '../store/actions/JournalActions'
 
-const mapStateToProps = ({ journalState }) => {
-  return { journalState }
+const mapStateToProps = ({ journalState, authState }) => {
+  return { journalState, authState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -16,32 +16,45 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+////
+
+
 const NewEntry = (props) => {
   let legible = ''
-  props.journalState.read.forEach((index)=>{
-    legible+= `${index.name}, `
-  })
+  {
+    if(props.journalState.read){
+      props.journalState.read.forEach((index)=>{
+        legible+= `${index.name}, `
+      })
+    }else{}}
 
   const handleChange = (e) => {
+    e.preventDefault()
     props.setEntryForm(e.target.name, e.target.value)
+    console.log(props.journalState)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const entryForm = {
-      read: props.journalState.read,
+      userID: props.authState.thisUser,
+      read: legible,
       entryTitle: props.journalState.entryTitle,
       entryBody: props.journalState.entryBody,
-      entryIcon: props.journalState.entryIcon
+      entryIcon: props.journalState.entryIcon,
+      inJournal: 1
     }
+    console.log(entryForm)
     try {
-      await props.submitEntry(entryForm)
+      await props.submitEntry(props.authState.thisUser,entryForm)
     } catch (error) {
       return alert('The entry failed to save. Please wait a moment and try again.')
     }
   }
 
-console.log(props.journalState.read)
+// console.log(props.journalState.read)
+
+////
 
   return (
 
@@ -51,12 +64,14 @@ console.log(props.journalState.read)
       This is where you can make a new journal entry
       <div className="newentry-form-wrapper">
         <form className="newentry-form">
-          <input
+          {(props.journalState.read) ? (<input
             type="text"
             name="read"
             value={legible}
-            readonly
-          />
+            readOnly
+          />):(
+            null
+          )}
           <input
             type="text"
             name="entryTitle"
@@ -64,10 +79,23 @@ console.log(props.journalState.read)
             onChange={handleChange}
             placeholder="entry title"
           />
-          <input
+          <textarea
+          cols="50"
+          rows="20"
+          name="entryBody"
+          value={props.journalState.entryBody}
+          onChange={handleChange}
+          placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit donec..."
           />
-          <input
-          />
+          <select name="entryIcon"
+            defaultValue=''
+          >
+            <option></option>
+            <option value="aaa">A</option>
+            <option value="bbb">B</option>
+            <option value="ccc">C</option>
+          </select>
+          <button onClick={handleSubmit}>Save Entry</button>
         </form>
       </div>
       </main>
