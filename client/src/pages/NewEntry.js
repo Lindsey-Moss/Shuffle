@@ -1,12 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import {
   EntryFormField,
   PostNewEntryAction
 } from '../store/actions/JournalActions'
 
-const mapStateToProps = ({ journalState, authState }) => {
-  return { journalState, authState }
+const mapStateToProps = ({ journalState, authState, navState }) => {
+  return { journalState, authState, navState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,12 +21,15 @@ const mapDispatchToProps = (dispatch) => {
 
 const NewEntry = (props) => {
   let legible = ''
-  {
-    if(props.journalState.read){
-      props.journalState.read.forEach((index)=>{
-        legible+= `${index.name}, `
-      })
-    }else{}}
+  const checkRead = () => {
+    props.journalState.read.map((index)=>{
+      if(index.position){
+        legible += `${index.name}, `
+      }else{
+        legible+= `${index.name} - inverted, `
+      }})
+      legible= legible.substring(0,(legible.length-2))
+  }
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -52,26 +55,25 @@ const NewEntry = (props) => {
     }
   }
 
-// console.log(props.journalState.read)
-
 ////
 
   return (
-
     <div className="newentry-page leave-room-for-jesus-i-mean-navbar">
+      {checkRead()}
       <div>{/*spacer for navbar*/}</div>
       <main>
       This is where you can make a new journal entry
       <div className="newentry-form-wrapper">
         <form className="newentry-form">
-          {(props.journalState.read) ? (<input
-            type="text"
-            name="read"
-            value={legible}
-            readOnly
-          />):(
-            null
-          )}
+          {(props.journalState.read && (props.navState.from !=='nav')) ? (
+            <input
+              type="text"
+              name="read"
+              value={legible}
+              readOnly
+            />):(
+              null
+            )}
           <input
             type="text"
             name="entryTitle"

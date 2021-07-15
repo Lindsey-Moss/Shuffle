@@ -19,5 +19,9 @@ export const CURRENT_DECK = 'CURRENT_DECK'
 export const NEW_DAILY = 'NEW_DAILY'
 export const NEW_READ = 'NEW_READ'
 
-
 //// USER
+
+
+//// NAVIGATION
+export const SET_FROM = 'SET_FROM'
+export const CHECK_PATH = 'CHECK_PATH'

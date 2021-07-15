@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { SetFrom } from '../store/actions/NavActions'
 
 const mapStateToProps = ({ authState }) => {
   return { authState }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setFrom: (string) => dispatch(SetFrom(string))
+  }
 }
 
 const Nav = (props) => {
@@ -51,7 +58,7 @@ const Nav = (props) => {
           {/* eslint-disable-next-line*/ }
           <button className="navbar-btn" onClick={ () => { { props.history.push('/journal'); checkPathForAuth(); checkPathForProfile() } } }>Journal</button>
           {/* eslint-disable-next-line*/ }
-          <button className="navbar-btn" onClick={ () => { { props.history.push('/journal/new'); checkPathForAuth(); checkPathForProfile() } } }>Write a New Entry</button>
+          <button className="navbar-btn" onClick={ () => { { props.setFrom('nav'); props.history.push('/journal/new'); checkPathForAuth(); checkPathForProfile() } } }>Write a New Entry</button>
           <button className="navbar-btn" onClick={ props.logOut }> Log Out </button>
         </>
       ) : (
@@ -75,4 +82,4 @@ const Nav = (props) => {
     </div>
   )
 }
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

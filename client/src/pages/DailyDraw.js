@@ -9,6 +9,9 @@ import {
   SetReadInfo
 } from '../store/actions/JournalActions'
 import DeckSummary from '../components/DeckSummary'
+import {
+  SetFrom
+} from '../store/actions/NavActions'
 
 const mapStateToProps = ({ tarotState }) => {
   return { tarotState }
@@ -19,7 +22,8 @@ const mapDispatchToProps = (dispatch) => {
     setDaily: () => dispatch(GetDaily()),
     fetchDecks: () => dispatch(LoadAllDecks()),
     setDeck: (deckID) => dispatch(LoadCurrentDeck(deckID)),
-    setReadForJournal: (read)=> dispatch(SetReadInfo(read))
+    setReadForJournal: (read)=> dispatch(SetReadInfo(read)),
+    setFrom: (string) => dispatch(SetFrom(string))
   }
 }
 
@@ -35,9 +39,10 @@ const DailyDraw = (props) => {
     let reading = []
     reading.push({
       name: props.tarotState.theDaily.cardName,
-      position: props.tarotState.theDaily.dailyCardUpright
+      position: props.tarotState.dailyCardUpright
     })
     props.setReadForJournal(reading)
+    props.setFrom('daily')
     props.history.push('/journal/new')
   }
 
