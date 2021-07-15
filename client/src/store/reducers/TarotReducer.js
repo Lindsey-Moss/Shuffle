@@ -31,21 +31,20 @@ const TarotReducer = (state = iState, action) => {
       let side = Math.round(Math.random())
       return { ...state, theDaily: draw, dailyCardUpright: side }
     case NEW_READ:
-      let readDeck = state.thisDeck
+      let readDeck = [...state.thisDeck]
       let reading = []
-      for (let i=0;i<(action.payload);i++){
+      for (let i=0;i<action.payload;i++){
         let readSide = Math.round(Math.random())
-        console.log(readSide)
         let pullIndex = Math.floor(Math.random()*readDeck.length)
-        console.log(pullIndex)
         let pullCard = readDeck[pullIndex]
         reading.push({
           card: pullCard,
           position: readSide})
-        readDeck.splice(readDeck[pullIndex],1)
+        readDeck.splice(pullIndex,1)
         console.log(readDeck)
       }
-      return { ...state, thisRead: reading }
+      console.log(readDeck)
+      return { ...state, thisDeck: readDeck, thisRead: reading }
     default:
       return { ...state }
   }
