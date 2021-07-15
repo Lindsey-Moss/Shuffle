@@ -55,6 +55,7 @@ function App(props) {
 
   useEffect(() => {
     getToken()
+    // eslint-disable-next-line
   }, [props.authState.isAuthenticated])
 
   return (
@@ -87,7 +88,12 @@ function App(props) {
 
         <Route exact path="/reading" component={Reading} />
 
-        <Route exact path="/reading/daily" component={DailyDraw} />
+        <Route exact path="/reading/daily" render={(props) => (
+          <DailyDraw {...props}
+            history={history}
+          />
+          )}
+        />
 
         <Route exact path="/journal" component={Journal} />
 

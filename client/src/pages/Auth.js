@@ -76,7 +76,7 @@ const Auth = (props) => {
     {props.authState.isAuthenticated ? (props.history.push('/')) : (
       <div className="auth-page leave-room-for-jesus-i-mean-navbar">
         <div>{/*spacer for navbar*/}</div>
-      <div className="auth-form">
+      <div className="auth-form-wrapper">
         <button onClick={()=>{setForm(false)}}>Log In</button> or <button onClick={()=>{setForm(true)}}>Sign Up</button>
         <form className="auth-form">
           {isRegister ? (<input

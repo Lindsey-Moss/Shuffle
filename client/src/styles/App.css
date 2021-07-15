@@ -21,9 +21,9 @@ button {
 }
 
 .openbtn {
-  position: absolute;
+  position: fixed;
   z-index: 1;
-  top: 6.9vmin;
+  top: 6vmin;
   left: 0;
   border:none;
   background-color: transparent;
@@ -77,6 +77,14 @@ button {
 
 /* */
 
+/* ---- DAILY DRAW ---- */
+.shufflebtn {
+  display: inline-block
+}
+.daily-reveal {
+  display: none
+}
+
 
 /*////////////////////////////*/
 /*-------- COMPONENTS --------*/
@@ -94,10 +102,11 @@ button {
   align-items: center;
   background-color: thistle;
   width: 180px;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   padding: 1em 0em;
+  transition: all ease-in-out 0.2s;
 }
 
 .navbar-logo {
