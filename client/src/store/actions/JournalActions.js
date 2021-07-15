@@ -13,7 +13,8 @@ import {
   POST_ENTRY,
   SET_ENTRIES,
   UPDATE_ENTRY,
-  DELETE_ENTRY
+  DELETE_ENTRY,
+  SET_ENTRY_TITLE
  } from '../types'
 
 export const EntryFormField = (formName, formValue) => ({
@@ -24,6 +25,11 @@ export const EntryFormField = (formName, formValue) => ({
 export const SetReadInfo = (read) => ({
   type: SET_READ_INFO,
   payload: read
+})
+
+export const SetEntryTitle = (string) => ({
+  type: SET_ENTRY_TITLE,
+  payload: string
 })
 
 export const LoadAllUserEntries = (userID) => {

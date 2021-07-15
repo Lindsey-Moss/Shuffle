@@ -12,6 +12,7 @@ export const SET_ENTRIES = 'SET_ENTRIES'
 export const UPDATE_ENTRY = 'UPDATE_ENTRY'
 export const DELETE_ENTRY = 'DELETE_ENTRY'
 export const SET_READ_INFO = 'SET_READ_INFO'
+export const SET_ENTRY_TITLE = 'SET_ENTRY_TITLE'
 
 //// TAROT
 export const ALL_DECKS = 'ALL_DECKS'

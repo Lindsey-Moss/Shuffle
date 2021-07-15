@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import {
   EntryFormField,
-  PostNewEntryAction
+  PostNewEntryAction,
+  SetEntryTitle
 } from '../store/actions/JournalActions'
 
 const mapStateToProps = ({ journalState, authState, navState }) => {
@@ -11,6 +12,7 @@ const mapStateToProps = ({ journalState, authState, navState }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    entryTitleAutopop: (string) => dispatch(SetEntryTitle(string)),
     setEntryForm: (formName, formValue) => dispatch(EntryFormField(formName,formValue)),
     submitEntry: (userID, entryForm) => dispatch(PostNewEntryAction(userID,entryForm))
   }
@@ -29,6 +31,16 @@ const NewEntry = (props) => {
         return legible+= `${index.name} - inverted, `
       }})
       return legible= legible.substring(0,(legible.length-2))
+  }
+
+  const checkFrom = () => {
+    let now = new Date()
+    switch (props.navState.from){
+      case 'daily':
+        return props.entryTitleAutopop(`Daily Draw - ${now.getMonth()+1}.${now.getDate()}.${now.getFullYear()}`)
+      default:
+        return null
+    }
   }
 
   const handleChange = (e) => {
@@ -54,6 +66,10 @@ const NewEntry = (props) => {
       return alert('The entry failed to save. Please wait a moment and try again.')
     }
   }
+
+  useEffect(()=>{
+    checkFrom()
+  },[])
 
 ////
 

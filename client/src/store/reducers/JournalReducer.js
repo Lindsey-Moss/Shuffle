@@ -4,7 +4,8 @@ import {
   SET_READ_INFO,
   POST_ENTRY,
   UPDATE_ENTRY,
-  DELETE_ENTRY
+  DELETE_ENTRY,
+  SET_ENTRY_TITLE
  } from '../types'
 
 const iState = {
@@ -21,6 +22,8 @@ const JournalReducer = (state = iState, action) => {
       return {...state, viewingEntries: action.payload}
     case SET_READ_INFO:
       return {...state, read: action.payload}
+    case SET_ENTRY_TITLE:
+      return {...state, entryTitle: action.payload}
     case ENTRY_FORM:
       return { ...state, [action.payload.name]: action.payload.value }
     case POST_ENTRY:

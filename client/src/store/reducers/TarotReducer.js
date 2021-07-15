@@ -43,6 +43,7 @@ const TarotReducer = (state = iState, action) => {
           card: pullCard,
           position: readSide})
         readDeck.splice(readDeck[pullIndex],1)
+        console.log(readDeck)
       }
       return { ...state, thisRead: reading }
     default:

@@ -10,11 +10,11 @@ const Home = (props) => {
   return (
     <div className="homepage leave-room-for-jesus-i-mean-navbar">
       <div>{/*spacer for navbar*/}</div>
-     <div className="dashboard">
+     <main className="dashboard">
        This is the homepage
 
      <button onClick={()=>{props.history.push('reading/daily')}}>Daily Draw</button>
-     </div>
+     </main>
     </div>
   )
 }

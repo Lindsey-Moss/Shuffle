@@ -12,8 +12,10 @@ const Profile = (props) => {
       {props.authState.isAuthenticated ? (
         <div className="profile-page leave-room-for-jesus-i-mean-navbar">
           <div>{/*spacer for navbar*/}</div>
-      
+          <main>
           This is your profile
+
+          </main>
 
         </div>
         
