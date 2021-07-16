@@ -36,7 +36,7 @@ const Login = async (req, res) => {
 
 const CheckLogin = async (req,res) => {
   try {
-    const { payload } = res.locals
+    const payload  = res.locals.payload
     res.send(payload)
   } catch (error) {
     throw error
