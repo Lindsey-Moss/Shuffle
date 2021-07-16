@@ -7,8 +7,14 @@ import {
   AUTHENTICATED,
   AUTH_FORM,
   LOGIN,
-  REGISTER
+  REGISTER,
+  TOGGLE_AUTH
 } from '../types'
+
+export const ToggleAuth = (boolean) => ({
+  type: TOGGLE_AUTH,
+  payload: boolean
+})
 
 export const AuthFormField = (formName, formValue) => ({
   type: AUTH_FORM,

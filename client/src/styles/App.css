@@ -24,21 +24,28 @@ form {
   display: grid;
   grid-template-columns: 180px 1fr;
   padding: 1em;
+  transition: grid-template-columns 0.25s;
 }
 
 .openbtn {
   position: fixed;
   z-index: 1;
-  top: 6vmin;
+  height: 100%;
+  width: 1.6em;
+  vertical-align: top;
+  top: 0;
   left: 0;
   border:none;
   background-color: transparent;
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: 1.3em;
+  color: black;
   background: thistle;
-  padding: 6px 14px;
-  vertical-align: middle;
-  transition: color 0.25s;
+  padding-top: 6px;
+  transition: color ease-in-out 0.3s;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .openbtn:hover {
@@ -75,10 +82,101 @@ form {
 
 /* ---- PROFILE ---- */
 
-.auth-page {
+.profile-page {
   height: 100vh;
-  background-color: yellowgreen;
+  background-color: mediumseagreen;
+  padding: 0;
+}
+.profile-main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
+.profile-column{
+  width: 70%;
+  height: 100%;
+  margin: 0;
+  background-color: white;
+  display:flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+}
+
+.profile-top{
+  z-index:2;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 150px;
+  justify-items: center;
+  align-items: end;
+  background-image: url('https://www.wallpaperflare.com/static/201/847/810/landscape-firewatch-flying-mountains-wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  padding-bottom:10px;
+}
+
+.profile-image-box{
+  margin-bottom:-30px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 4px solid white;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.profile-image{
+  width: 120%;
+  height: 120%;
+  margin: 0.5em;
+}
+.profile-titlecard{
+  justify-self: self-start;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-end;
+  align-items: flex-start;
+  color: white;
+  text-shadow: black 0 0 4px;
+}
+.profile-titlecard h1, .profile-top h3 {
+  width: 100%;
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+
+.profile-detail-box{
+  margin: 0.3em 0;
+  padding: 1.5em 0;
+  background-color: lightgray;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 1em;
+  justify-items: center;
+  align-items: center;
+}
+
+.profile-editbtn-box {
+  width: 108px;
+  text-align: center;
+}
+
+.profile-editbtn {
+  margin-top: 1em;
+}
+
+.profile-detail-box h6 {
+  padding: 0;
+  margin: 0 2em 0 0;
+  text-align: right;
+  justify-self: end;
+  font-weight: normal;
 }
 
 /* */
@@ -134,9 +232,9 @@ form {
 
 .closebtn {
   position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
+  top: 6px;
+  right: 0.25em;
+  font-size: 1.5em;
   margin-left: 50px;
   color: black;
   border:none;

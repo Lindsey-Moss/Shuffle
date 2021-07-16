@@ -6,7 +6,10 @@ import {
   PostNewEntryAction,
   SetEntryTitle
 } from '../store/actions/JournalActions'
-import { SetFrom } from '../store/actions/NavActions'
+import { 
+  SetFrom,
+  ToggleNav 
+} from '../store/actions/NavActions'
 
 const mapStateToProps = ({ journalState, authState, navState }) => {
   return { journalState, authState, navState }
@@ -17,7 +20,8 @@ const mapDispatchToProps = (dispatch) => {
     entryTitleAutopop: (string) => dispatch(SetEntryTitle(string)),
     setEntryForm: (formName, formValue) => dispatch(EntryFormField(formName,formValue)),
     submitEntry: (userID, entryForm) => dispatch(PostNewEntryAction(userID,entryForm)),
-    setFrom: (string) => dispatch(SetFrom(string))
+    setFrom: (string) => dispatch(SetFrom(string)),
+    toggleNav: (bool) => dispatch(ToggleNav(bool))
   }
 }
 
@@ -70,9 +74,14 @@ const NewEntry = (props) => {
     }
   }
 
+  const checkSide = () => {
+    props.toggleNav(props.navState.navOpen)
+  }
+
   useEffect(()=>{
     props.getToken();
-    checkFrom()
+    checkFrom();
+    checkSide()
   },[])
 
 ////

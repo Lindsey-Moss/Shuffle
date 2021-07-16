@@ -10,11 +10,12 @@ import {
 } from '../store/actions/JournalActions'
 import DeckSummary from '../components/DeckSummary'
 import {
-  SetFrom
+  SetFrom,
+  ToggleNav
 } from '../store/actions/NavActions'
 
-const mapStateToProps = ({ tarotState }) => {
-  return { tarotState }
+const mapStateToProps = ({ tarotState, navState }) => {
+  return { tarotState, navState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -23,7 +24,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchDecks: () => dispatch(LoadAllDecks()),
     setDeck: (deckID) => dispatch(LoadDailyDeck(deckID)),
     setReadForJournal: (read)=> dispatch(SetReadInfo(read)),
-    setFrom: (string) => dispatch(SetFrom(string))
+    setFrom: (string) => dispatch(SetFrom(string)),
+    toggleNav: (bool) => dispatch(ToggleNav(bool))
   }
 }
 
@@ -46,8 +48,13 @@ const DailyDraw = (props) => {
     props.history.push('/journal/new')
   }
 
+  const checkSide = () => {
+    props.toggleNav(props.navState.navOpen)
+  }
+
   useEffect(()=>{
-    fetchDecks()
+    fetchDecks();
+    checkSide()
   },[])
 
   return (

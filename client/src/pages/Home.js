@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { ToggleNav} from '../store/actions/NavActions'
 
-const mapStateToProps = ({ authState }) => {
-  return { authState }
+const mapStateToProps = ({ authState,navState }) => {
+  return { authState,navState }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleNav: (bool) => dispatch(ToggleNav(bool))
+  }
 }
 
 const Home = (props) => {
+
+  const checkSide = () => {
+    props.toggleNav(props.navState.navOpen)
+  }
+
+  useEffect(() => {
+    checkSide()
+  }, [])
 
   return (
     <div className="homepage leave-room-for-jesus-i-mean-navbar">
@@ -18,4 +33,4 @@ const Home = (props) => {
     </div>
   )
 }
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

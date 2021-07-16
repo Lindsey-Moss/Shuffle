@@ -1,71 +1,70 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { SetFrom } from '../store/actions/NavActions'
+import {
+  SetFrom,
+  CheckPath,
+  ToggleNav
+} from '../store/actions/NavActions'
 
-const mapStateToProps = ({ authState }) => {
-  return { authState }
+const mapStateToProps = ({ authState, navState }) => {
+  return { authState, navState }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFrom: (string) => dispatch(SetFrom(string))
+    setFrom: (string) => dispatch(SetFrom(string)),
+    setPath: (string) => dispatch(CheckPath(string)),
+    toggleNav: (bool) => dispatch(ToggleNav(bool))
   }
 }
 
 const Nav = (props) => {
-  //// LOCAL STATE ////
-  const [onAuth, setAuth] = useState(null)
-  const [onProfile, setProfile] = useState(null)
-  ////
 
-  const checkPathForAuth = () => {
-    ((window.location.pathname).includes('auth')) ? (setAuth(true)) : (setAuth(false))
-  }
-
-  const checkPathForProfile = () => {
-    ((window.location.pathname).includes('profile')) ? (setProfile(true)) : (setProfile(false))
+  const checkPath = () => {
+    if (window.location.pathname.includes('auth')) {
+      return props.setPath('auth')
+    } else if (window.location.pathname.includes('profile')) {
+      return props.setPath('profile')
+    } else {
+      return props.setPath('')
+    }
   }
 
   const closeSide = () => {
-    let aside = document.querySelector('.navbar')
-    let spacer = document.querySelector('.leave-room-for-jesus-i-mean-navbar')
-    spacer.style.gridTemplateColumns = '50px 1fr'
-    aside.style.width = 0;
-    aside.style.opacity = 0;
-    aside.style.zIndex = -999
+    props.navState.navOpen ? (props.toggleNav(false)) : (props.toggleNav(false))
   }
 
   return (
     <div className="navbar">
-      <button className="closebtn" onClick={ () => { closeSide() } }>&times;</button>
+      <button className="closebtn" onClick={ () => { closeSide() } }>&#10235;</button>
       <img className="navbar-logo"
-        onClick={ () => { props.history.push('/'); checkPathForAuth(); checkPathForProfile() } }
+        onClick={ () => { props.history.push('/'); checkPath() } }
         src="https://freesvg.org/img/Placeholder.png"
         alt="this is where i'd put a logo... if i had one!" />
 
       <button className="navbar-btn"
-        onClick={ () => { props.history.push('/reading'); checkPathForAuth(); checkPathForProfile() } }
+        onClick={ () => { props.history.push('/reading'); checkPath() } }
       >
         Reading
       </button>
 
       { (props.authState.isAuthenticated) ? (
         <>
-          { onProfile ? (null) : (<button className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPathForProfile() } }>Profile</button>) }
-          <button className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPathForAuth(); checkPathForProfile() } }>Journal</button>
-          <button className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPathForAuth(); checkPathForProfile() } }>Write a New Entry</button>
+          { (props.navState.on === 'profile') ? (null) : (<button className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPath() } }>Profile</button>) }
+          <button className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPath() } }>Journal</button>
+          <button className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPath() } }>Write a New Entry</button>
           <button className="navbar-btn" onClick={ props.logOut }> Log Out </button>
         </>
       ) : (
         <>
-          { onAuth ? (null) : (
+          { (props.navState.on === 'auth') ? (null) : (
             <>
               <button className="navbar-btn"
-                onClick={ () => { props.history.push('/auth/query'); checkPathForAuth() } }>
+                onClick={ () => { props.history.push('/auth/query'); checkPath() } }>
                 Log In
               </button>
               <button className="navbar-btn"
-                onClick={ () => { props.history.push('/auth'); checkPathForAuth() } }>
+                onClick={ () => { props.history.push('/auth'); checkPath() } }>
                 Sign Up
               </button>
             </>

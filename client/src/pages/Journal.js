@@ -6,14 +6,15 @@ import {
   LoadIconEntries
 } from '../store/actions/JournalActions'
 import {
-  SetFrom
+  SetFrom,
+  ToggleNav
 } from '../store/actions/NavActions'
 import Entry from '../components/Entry'
 import Unauthenticated from '../components/Unauthenticated'
 
 
-const mapStateToProps = ({ journalState, authState }) => {
-  return { journalState, authState }
+const mapStateToProps = ({ journalState, authState, navState }) => {
+  return { journalState, authState, navState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,7 +22,8 @@ const mapDispatchToProps = (dispatch) => {
     showAllEntries: (userID) => dispatch(LoadAllUserEntries(userID)),
     showFilteredEntries: (userID,string) => dispatch(LoadFilteredEntries(userID,string)),
     showIconEntries: (userID,icon) => dispatch(LoadIconEntries(userID,icon)),
-    setFrom: (string) => dispatch(SetFrom(string))
+    setFrom: (string) => dispatch(SetFrom(string)),
+    toggleNav: (bool) => dispatch(ToggleNav(bool))
   }
 }
 
@@ -29,9 +31,14 @@ const mapDispatchToProps = (dispatch) => {
 const Journal = (props) => {
   const { showAllEntries, authState, getToken } = props
 
+  const checkSide = () => {
+    props.toggleNav(props.navState.navOpen)
+  }
+
   useEffect(() => {
     getToken();
-    showAllEntries(authState.thisUser)
+    showAllEntries(authState.thisUser);
+    checkSide()
   },[])
 
   return (

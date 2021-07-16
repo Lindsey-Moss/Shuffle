@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {connect } from 'react-redux'
 import {
   SignIn, 
   AuthFormField,
-  Register
+  Register,
+  ToggleAuth
 } from '../store/actions/AuthActions'
+import { ToggleNav } from '../store/actions/NavActions'
 
 const mapStateToProps = ({authState, navState}) => {
   return {authState, navState}
@@ -14,11 +16,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setAuthForm: (formName, formValue) => dispatch(AuthFormField(formName, formValue)),
     setLogin: (authForm) => dispatch(SignIn(authForm)), 
-    setRegister: (authForm) => dispatch(Register(authForm))
+    setRegister: (authForm) => dispatch(Register(authForm)),
+    setFormType: (boolean) => dispatch(ToggleAuth(boolean)),
+    toggleNav: (boolean) => dispatch(ToggleNav(boolean))
   }
 }
 
 const Auth = (props) => {
+  const { setFormType } = props
   
   const checkPath = () => {
     if ((window.location.pathname).includes('query')) {
@@ -27,17 +32,9 @@ const Auth = (props) => {
       return true
     }
   }
-//// LOCAL STATE ////
-  const [isRegister, setForm] = useState(checkPath())
-  const [zodiacChoice, setChoice] = useState(null)
-////
 
   const handleChange = (e) => {
     props.setAuthForm(e.target.name, e.target.value)
-  }
-
-  const handleOptionChange = (e) => {
-    setChoice(e.target.value)
   }
 
   const whereTo = () => {
@@ -49,7 +46,7 @@ const Auth = (props) => {
       case 'profile':
         return props.history.push('/profile')
       default:
-        return props.history.push('/')
+        return window.location.assign('/')
     }
   }
 
@@ -75,13 +72,18 @@ const Auth = (props) => {
       preferredName: props.authState.preferredName, 
       password: props.authState.password,
       zipCode: props.authState.zipCode,
-      zodiac: zodiacChoice
+      zodiac: props.authState.zodiac
     })
     window.location.assign('/auth/query')
   }
 
+  const checkSide = () => {
+    props.toggleNav(props.navState.navOpen)
+  }
+
   useEffect(() => {
-    setForm(checkPath())
+    setFormType(checkPath());
+    checkSide()
   }, [])
 
   return (
@@ -90,9 +92,9 @@ const Auth = (props) => {
       <div className="auth-page leave-room-for-jesus-i-mean-navbar">
         <div>{/*spacer for navbar*/}</div>
         <div className="auth-form-wrapper">
-          <button onClick={()=>{setForm(false)}}>Log In</button> or <button onClick={()=>{setForm(true)}}>Sign Up</button>
+          <button onClick={()=>{setFormType(false)}}>Log In</button> or <button onClick={()=>{setFormType(true)}}>Sign Up</button>
           <form className="auth-form">
-            {isRegister ? (<input
+            {props.authState.needRegister ? (<input
                 type="email"
                 name="email"
                 value={props.authState.email}
@@ -108,7 +110,7 @@ const Auth = (props) => {
                 placeholder="username"
                 required
             />
-            {isRegister ? (<input
+            {props.authState.needRegister ? (<input
                 type="text"
                 name="preferredName"
                 value={props.authState.preferredName}
@@ -123,7 +125,7 @@ const Auth = (props) => {
                 placeholder="password"
                 required
             />
-            {isRegister ? (<input
+            {props.authState.needRegister ? (<input
                 type="number"
                 onInput={(e)=>{ 
                   e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,5)
@@ -133,10 +135,10 @@ const Auth = (props) => {
                 onChange={handleChange}
                 placeholder="zip code"
             />) : (null)}
-            {isRegister ? (
+            {props.authState.needRegister ? (
                 <select name="zodiac"
-                  defaultValue={zodiacChoice}
-                  onChange={handleOptionChange}
+                  defaultValue={props.authState.zodiac}
+                  onChange={handleChange}
                 >
                   <option></option>
                   <option value="Aquarius">Aquarius</option>
@@ -154,7 +156,7 @@ const Auth = (props) => {
                   <option value="Don't know/Don't care">Don't know/Don't care</option>
                 </select>
             ) : (null)}
-              {isRegister ? (
+              {props.authState.needRegister ? (
                 <button onClick={handleSubmitRegister}>
                   Submit
                 </button>

@@ -2,10 +2,12 @@ import {
   AUTHENTICATED,
   AUTH_FORM,
   REGISTER,
-  LOGIN
+  LOGIN,
+  TOGGLE_AUTH
 } from '../types'
 
 const iState = {
+  needRegister: false,
   email: '',
   userName: null,
   preferredName: '',
@@ -18,6 +20,8 @@ const iState = {
 
 const AuthReducer = (state = iState, action) => {
   switch (action.type) {
+    case TOGGLE_AUTH:
+      return {...state, needRegister: action.payload }
     case AUTH_FORM:
       return { ...state, [action.payload.name]: action.payload.value }
     case REGISTER:

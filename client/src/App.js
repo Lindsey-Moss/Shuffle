@@ -9,19 +9,21 @@ import Profile from './pages/Profile'
 import Reading from './pages/Reading'
 import DailyDraw from './pages/DailyDraw'
 import Journal from './pages/Journal'
+import NewEntry from './pages/NewEntry';
 import axios from 'axios';
 import { BASE_URL } from './globals';
 import { SessionChecked, SetUser } from './store/actions/AuthActions';
-import NewEntry from './pages/NewEntry';
+import { ToggleNav} from './store/actions/NavActions'
 
-const mapStateToProps = ({ authState }) => {
-  return { authState }
+const mapStateToProps = ({ authState, navState }) => {
+  return { authState, navState }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     checkSession: (bool) => dispatch(SessionChecked(bool)),
-    setUser: (userID) => dispatch(SetUser(userID))
+    setUser: (userID) => dispatch(SetUser(userID)),
+    toggleNav: (bool) => dispatch(ToggleNav(bool))
   }
 }
 
@@ -32,17 +34,12 @@ function App(props) {
     let token = localStorage.getItem('token')
     if (token) {
       const res = await axios.get(`${BASE_URL}auth/session`)
-      return props.setUser(res.data.id), props.checkSession(true)
+      return (props.setUser(res.data.id), props.checkSession(true))
     }
   }
 
   const openSide = () => {
-    let aside = document.querySelector('.navbar')
-    let spacer = document.querySelector('.leave-room-for-jesus-i-mean-navbar')
-    spacer.style.gridTemplateColumns= '180px 1fr'
-    aside.style.width="180px";
-    aside.style.opacity=1;
-    aside.style.zIndex=10
+    props.navState.navOpen ? (props.toggleNav(true)) : (props.toggleNav(true))
   }
 
   const logOut = () => {
@@ -59,7 +56,7 @@ function App(props) {
   return (
     <>
     <nav>
-      <button className="openbtn" onClick={()=>{openSide()}}>&#9776;</button>
+      <button className="openbtn" onClick={()=>{openSide()}}>&#10236;</button>
       <Nav {...props} 
         history={history} 
         logOut={logOut}
