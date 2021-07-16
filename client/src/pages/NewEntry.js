@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const NewEntry = (props) => {
-  let legible = ''
+  let legible = null
   const checkRead = () => {
     props.journalState.read.map((index)=>{
       if(index.position){
@@ -46,7 +46,6 @@ const NewEntry = (props) => {
   const handleChange = (e) => {
     e.preventDefault()
     props.setEntryForm(e.target.name, e.target.value)
-    console.log(props.journalState)
   }
 
   const handleSubmit = async (e) => {

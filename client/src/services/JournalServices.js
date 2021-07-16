@@ -31,8 +31,6 @@ export const GetIconEntries = async (userID, icon) => {
 export const PostNewEntry = async (userID, entryForm) => {
   try {
     const res = await API.post(`journal/${userID}`, entryForm)
-    console.log(res.data)
-    console.log(res.data)
     return res.data
   } catch (error) {
     throw error

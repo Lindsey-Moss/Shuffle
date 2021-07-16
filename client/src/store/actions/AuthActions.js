@@ -6,7 +6,6 @@ import {
 import {
   AUTHENTICATED,
   AUTH_FORM,
-  CURRENT_USER,
   LOGIN,
   REGISTER
 } from '../types'
@@ -29,7 +28,7 @@ export const Register = (authForm) => async (dispatch) => {
 }
 
 export const SetUser = (payload) => ({
-  type: CURRENT_USER,
+  type: LOGIN,
   payload: payload
 })
 

@@ -50,7 +50,6 @@ const DailyDraw = (props) => {
     fetchDecks()
   },[])
 
-  console.log(props.tarotState)
   return (
     <div className="dailydraw-page leave-room-for-jesus-i-mean-navbar">
 

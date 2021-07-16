@@ -53,7 +53,6 @@ const Reading = (props) => {
     fetchDecks()
   },[])
 
-  console.log(props.tarotState)
   return (
     <div className="reading-page leave-room-for-jesus-i-mean-navbar">
 

@@ -32,7 +32,7 @@ function App(props) {
     let token = localStorage.getItem('token')
     if (token) {
       const res = await axios.get(`${BASE_URL}auth/session`)
-      props.setUser(res.data.userID)
+      props.setUser(res.data.id)
       return props.checkSession(true)
     }
   }
@@ -85,7 +85,12 @@ function App(props) {
           )}
         />
 
-        <Route exact path="/reading" component={Reading} />
+        <Route exact path="/reading" render={(props) => (
+          <Reading {...props}
+            history={history}
+          />
+          )}
+        />
 
         <Route exact path="/reading/daily" render={(props) => (
           <DailyDraw {...props}
@@ -94,7 +99,13 @@ function App(props) {
           )}
         />
 
-        <Route exact path="/journal" component={Journal} />
+        <Route exact path="/journal" render={(props) => (
+          <Journal {...props}
+            history={history}
+            getToken={getToken}
+          />
+          )}
+        />
 
         <Route exact path="/journal/new" render={(props) => (
           <NewEntry {...props}
