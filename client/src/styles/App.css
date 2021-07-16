@@ -93,11 +93,13 @@ form {
 
 /* */
 
-/* ---- DAILY DRAW ---- */
+/* ---- READING ---- */
 
 .read-reveal {
   display: none
 }
+
+/* */
 
 
 /*////////////////////////////*/
@@ -149,6 +151,38 @@ form {
 
 .navbar-btn {
   margin: 1em 0;
+}
+
+/* */
+
+/* ---- ENTRY ---- */
+
+.entry-card {
+  border: 2px dashed red;
+  margin: 1em;
+  padding: 0.5em;
+}
+
+/* */
+
+/* ---- UNAUTHENTICATED ---- */
+
+.sorry-popup {
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.sorry-center {
+  text-align: center;
+  width: 30%;
+  height: 30%;
+  background-color: lavender;
+  padding: 1em;
 }
 
 /* */

@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 const Auth = (props) => {
   
   const checkPath = () => {
-    if ((window.location.pathname).replace('/auth','') === '/query') {
+    if ((window.location.pathname).includes('query')) {
       return false
     } else {
       return true
@@ -40,6 +40,19 @@ const Auth = (props) => {
     setChoice(e.target.value)
   }
 
+  const whereTo = () => {
+    switch (props.navState.from) {
+      case 'newentry':
+        return props.history.push('/journal/new')
+      case 'journal':
+        return props.history.push('/journal')
+      case 'profile':
+        return props.history.push('/profile')
+      default:
+        return props.history.push('/')
+    }
+  }
+
   const handleSubmitLogin = async (e) => {
     e.preventDefault()
     const authForm = {
@@ -48,7 +61,7 @@ const Auth = (props) => {
     }
     try {
       await props.setLogin(authForm)
-      window.location.assign('/')
+      whereTo()
     } catch (error) {
       return alert('Your username or password is incorrect')
     }

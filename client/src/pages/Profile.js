@@ -1,11 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { SetFrom} from '../store/actions/NavActions'
 
 const mapStateToProps = ({ authState }) => {
   return { authState }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setFrom: (string) => dispatch(SetFrom(string))
+  }
+}
+
 const Profile = (props) => {
+
+  function patience() {setTimeout(props.history.push('/auth/query'),500)}
 
   return (
     <>
@@ -20,9 +29,10 @@ const Profile = (props) => {
         </div>
         
       ) : (
-        props.history.push('/auth/query')
+        props.setFrom('profile'),
+        patience()
       )}
     </>
   )
 }
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps,mapDispatchToProps)(Profile)

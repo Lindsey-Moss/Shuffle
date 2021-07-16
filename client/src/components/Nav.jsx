@@ -39,21 +39,21 @@ const Nav = (props) => {
     <div className="navbar">
       <button className="closebtn" onClick={ () => { closeSide() } }>&times;</button>
       <img className="navbar-logo"
-        onClick={ () => { { props.history.push('/'); checkPathForAuth(); checkPathForProfile() } } }
+        onClick={ () => { props.history.push('/'); checkPathForAuth(); checkPathForProfile() } }
         src="https://freesvg.org/img/Placeholder.png"
         alt="this is where i'd put a logo... if i had one!" />
 
       <button className="navbar-btn"
-        onClick={ () => { { props.history.push('/reading'); checkPathForAuth(); checkPathForProfile() } } }
+        onClick={ () => { props.history.push('/reading'); checkPathForAuth(); checkPathForProfile() } }
       >
         Reading
       </button>
 
       { (props.authState.isAuthenticated) ? (
         <>
-          { onProfile ? (null) : (<button className="navbar-btn" onClick={ () => { { props.history.push('/profile'); checkPathForProfile() } } }>Profile</button>) }
-          <button className="navbar-btn" onClick={ () => { { props.history.push('/journal'); checkPathForAuth(); checkPathForProfile() } } }>Journal</button>
-          <button className="navbar-btn" onClick={ () => { { props.setFrom('nav'); props.history.push('/journal/new'); checkPathForAuth(); checkPathForProfile() } } }>Write a New Entry</button>
+          { onProfile ? (null) : (<button className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPathForProfile() } }>Profile</button>) }
+          <button className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPathForAuth(); checkPathForProfile() } }>Journal</button>
+          <button className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPathForAuth(); checkPathForProfile() } }>Write a New Entry</button>
           <button className="navbar-btn" onClick={ props.logOut }> Log Out </button>
         </>
       ) : (
@@ -61,11 +61,11 @@ const Nav = (props) => {
           { onAuth ? (null) : (
             <>
               <button className="navbar-btn"
-                onClick={ () => { { props.history.push('/auth/query'); checkPathForAuth() } } }>
+                onClick={ () => { props.history.push('/auth/query'); checkPathForAuth() } }>
                 Log In
               </button>
               <button className="navbar-btn"
-                onClick={ () => { { props.history.push('/auth?'); checkPathForAuth() } } }>
+                onClick={ () => { props.history.push('/auth'); checkPathForAuth() } }>
                 Sign Up
               </button>
             </>
