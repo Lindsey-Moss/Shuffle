@@ -51,7 +51,7 @@ const Journal = (props) => {
       </div>
 
     ):(
-      <Unauthenticated setFrom={props.setFrom} redirect='journal' />
+      <Unauthenticated history={props.history} setFrom={props.setFrom} redirect='journal' />
 
     )}
       </>

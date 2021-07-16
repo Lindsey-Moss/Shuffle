@@ -68,14 +68,14 @@ function App(props) {
       <div className="App">
     <Switch>
 
-        <Route exact path ="/" component={(props) => (
+        <Route exact path ="/" render={(props) => (
             <Home {...props} 
             />
           )}
         />
         <Route path="/auth/" component={Auth} />
 
-        <Route exact path="/profile" component={(props) => (
+        <Route exact path="/profile" render={(props) => (
           <Profile {...props}
             history={history}
             getToken={getToken}/>
@@ -96,7 +96,7 @@ function App(props) {
           )}
         />
 
-        <Route exact path="/journal" component={(props) => (
+        <Route exact path="/journal" render={(props) => (
           <Journal {...props}
             history={history}
             getToken={getToken}
