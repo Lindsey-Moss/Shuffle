@@ -171,12 +171,22 @@ form {
   margin-top: 1em;
 }
 
-.profile-detail-box h6 {
+.profile-details h6 {
   padding: 0;
   margin: 0 2em 0 0;
   text-align: right;
   justify-self: end;
   font-weight: normal;
+}
+
+.profile-details {
+  width: 100%;
+}
+
+.profile-about-box {
+  margin: 0.3em 0;
+  padding: 1.5em 0;
+  background-color: lightgray;
 }
 
 /* */
@@ -195,6 +205,15 @@ form {
 
 .read-reveal {
   display: none
+}
+
+/* */
+
+/* ---- JOURNAL ---- */
+
+.journal-main {
+  display: flex;
+  flex-flow: column-reverse;
 }
 
 /* */

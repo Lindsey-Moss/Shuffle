@@ -60,7 +60,7 @@ const NewEntry = (props) => {
     e.preventDefault()
     const entryForm = {
       userID: props.authState.thisUser,
-      read: legible.split(', '),
+      read: (legible) ? (legible.split(', ')):(null),
       entryTitle: props.journalState.entryTitle,
       entryBody: props.journalState.entryBody,
       entryIcon: props.journalState.entryIcon,

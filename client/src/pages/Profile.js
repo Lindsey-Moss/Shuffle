@@ -8,6 +8,7 @@ import {
   UpdateUserAction,
   DeleteUserAction
 } from '../store/actions/UserActions'
+import ProfileDetails from '../components/ProfileDetails'
 
 const mapStateToProps = ({ authState, navState, userState }) => {
   return { authState, navState, userState }
@@ -28,13 +29,6 @@ const Profile = (props) => {
   const { getToken, fetchUser, authState } = props
   const user = props.userState.thisUsersInfo
 
-  const changeDate = (ISOdate) => {
-    let dateParts = ISOdate.split("-");
-    let newDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2))
-    let dateWithoutTime = ((newDate.getMonth() + 1) + '.' + (newDate.getDate()) + '.' + newDate.getFullYear())
-    return dateWithoutTime;
-  }
-
   const checkSide = () => {
     props.toggleNav(props.navState.navOpen)
   }
@@ -45,31 +39,32 @@ const Profile = (props) => {
     getToken();
     fetchUser(authState.thisUser);
     checkSide()
-  },[authState.thisUser])
+  },[authState.isAuthenticated])
 
   return (
     <>
-      {authState.isAuthenticated ? (
+      {authState.isAuthenticated && user ? (
         <div className="profile-page leave-room-for-jesus-i-mean-navbar">
           <div>{/*spacer for navbar*/}</div>
           <main className="profile-main">
+            
             <div className="profile-column">
               <div className="profile-top">
                 <div className="profile-image-box">
-                  <img className="profile-image" src={user.image} alt={user.preferredName}/>
+                  <img className="profile-image" src={ user.image } alt={ user.preferredName } />
                 </div>
                 <div className="profile-titlecard">
-                  <h1>{user.preferredName}</h1>
-                  <h3>{user.userName}</h3>
+                  <h1>{ user.preferredName }</h1>
+                  <h3>{ user.userName }</h3>
                 </div>
               </div>
-                <div className="profile-detail-box">
-                  <div className="profile-editbtn-box">
-                    <button className="profile-editbtn">Edit Profile</button>
-                  </div>
-                  <h6>journaling since {changeDate(user.createdAt)}</h6>
-                </div>
+              <ProfileDetails user={user}/>
+              
+              <div className="profile-about-box">
+                <h2>About</h2>
+                { (user.zodiac) ? (<h5>Sign: { user.zodiac }</h5>) : (null) }
                 
+              </div>
 
             </div>
 

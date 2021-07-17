@@ -46,9 +46,8 @@ const Journal = (props) => {
     {(authState.thisUser) ? (
       <div className="journal-page leave-room-for-jesus-i-mean-navbar">
         <div>{/*spacer for navbar*/}</div>
-        <main>
-        This is where journal entries will be displayed
-  
+        
+        <main className="journal-main">  
         {props.journalState.viewingEntries.map((entry)=>{
           return <Entry entry={entry} key={entry.id}/>
         })}
