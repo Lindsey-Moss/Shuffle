@@ -103,7 +103,10 @@ const Auth = (props) => {
                 required
             />) : (null)}
             <input
-                type="username"
+                type="text"
+                onInput={(e)=>{ 
+                  e.target.value = (e.target.value).replace(' ','_').slice(0,18)
+              }}
                 name="userName"
                 value={props.authState.username}
                 onChange={handleChange}
@@ -112,6 +115,9 @@ const Auth = (props) => {
             />
             {props.authState.needRegister ? (<input
                 type="text"
+                onInput={(e)=>{ 
+                  e.target.value = (e.target.value).slice(0,18)
+              }}
                 name="preferredName"
                 value={props.authState.preferredName}
                 onChange={handleChange}

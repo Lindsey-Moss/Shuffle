@@ -71,7 +71,7 @@ const ProfileDetails = (props) => {
     } else if (zipcode >= 20600 && zipcode <= 21999) {
       st = 'MD';
       state = 'Maryland';
-    } else if ((zipcode >= 1000 && zipcode <= 2799) || (zipcode == 5501) || (zipcode == 5544)) {
+    } else if ((zipcode >= 1000 && zipcode <= 2799) || (zipcode === 5501) || (zipcode === 5544)) {
       st = 'MA';
       state = 'Massachusetts';
     } else if (zipcode >= 48000 && zipcode <= 49999) {
@@ -110,7 +110,7 @@ const ProfileDetails = (props) => {
     } else if (zipcode >= 87000 && zipcode <= 88499) {
       st = 'NM';
       state = 'New Mexico';
-    } else if ((zipcode >= 10000 && zipcode <= 14999) || (zipcode == 6390) || (zipcode == 501) || (zipcode == 544)) {
+    } else if ((zipcode >= 10000 && zipcode <= 14999) || (zipcode === 6390) || (zipcode === 501) || (zipcode === 544)) {
       st = 'NY';
       state = 'New York';
     } else if (zipcode >= 43000 && zipcode <= 45999) {
@@ -149,7 +149,7 @@ const ProfileDetails = (props) => {
     } else if (zipcode >= 5000 && zipcode <= 5999) {
       st = 'VT';
       state = 'Vermont';
-    } else if ((zipcode >= 20100 && zipcode <= 20199) || (zipcode >= 22000 && zipcode <= 24699) || (zipcode == 20598)) {
+    } else if ((zipcode >= 20100 && zipcode <= 20199) || (zipcode >= 22000 && zipcode <= 24699) || (zipcode === 20598)) {
       st = 'VA';
       state = 'Virgina';
     } else if ((zipcode >= 20000 && zipcode <= 20099) || (zipcode >= 20200 && zipcode <= 20599) || (zipcode >= 56900 && zipcode <= 56999)) {
@@ -222,7 +222,7 @@ const ProfileDetails = (props) => {
       </div>
       <div className="profile-details">
         { (user.createdAt) ? (<h6>journaling since { changeDate(user.createdAt) }</h6>) : (null) }
-        { (user.zipCode && user.zipCode != 0) ? (<h6>keeping their mind clear in { getState(user.zipCode) }</h6>) : (null) }
+        { (user.zipCode && user.zipCode !== 0) ? (<h6>keeping their mind clear in { getState(user.zipCode) }</h6>) : (null) }
       </div>
     </div>
 
