@@ -83,7 +83,7 @@ const DailyDraw = (props) => {
         <div className="daily-reveal">
         <img src={(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.frontImage):(props.tarotState.theDaily.frontImageInv)} alt={props.tarotState.cardName}/>
         <h3>{props.tarotState.theDaily.cardName}{(props.tarotState.dailyCardUpright) ? (null):(<span style={{fontStyle:"italic"}}> - Inverted</span>)}</h3>
-        <p>{props.tarotState.theDaily.cardDefinition}</p>
+        <p>{(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.cardUpDef) : (props.tarotState.theDaily.cardInvDef)}</p>
         <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
       </div>
       ):(null)}

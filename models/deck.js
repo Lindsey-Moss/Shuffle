@@ -27,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     backImage: DataTypes.STRING,
     backImgInv: DataTypes.STRING,
     deckArtist: DataTypes.STRING,
-    deckDetails: DataTypes.TEXT
+    deckSummary: DataTypes.TEXT,
+    deckDetails: DataTypes.TEXT,
+    deckLink: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Deck',

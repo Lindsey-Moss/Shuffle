@@ -49,7 +49,7 @@ const Profile = (props) => {
           <main className="profile-main">
             
             <div className="profile-column">
-              <div className="profile-top">
+              <div className="profile-top" style={{backgroundImage:`url(${user.banner})`}}>
                 <div className="profile-image-box">
                   <img className="profile-image" src={ user.image } alt={ user.preferredName } />
                 </div>
@@ -63,6 +63,8 @@ const Profile = (props) => {
               <div className="profile-about-box">
                 <h2>About</h2>
                 { (user.zodiac) ? (<h5>Sign: { user.zodiac }</h5>) : (null) }
+                <h5>Bio:</h5>
+                <p>{(user.bio) ? (user.bio) : (<span className="profile-nobio">This user has not provided a bio.</span>)}</p>
                 
               </div>
 

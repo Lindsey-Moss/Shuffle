@@ -93,7 +93,7 @@ const Reading = (props) => {
             return <div className="reading-card" key={index.card.id}>
             <img src={(index.position) ? (index.card.frontImage):(index.card.frontImageInv)} alt={index.card.cardName}/>
             <h3>{index.card.cardName}{(index.position) ? (null):(<span style={{fontStyle:"italic"}}> - Inverted</span>)}</h3>
-            <p>{index.card.cardDefinition}</p>
+            <p>{(index.position) ? (index.card.cardUpDef) : (index.card.cardInvDef)}</p>
             </div>
           })}
           

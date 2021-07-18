@@ -111,7 +111,6 @@ form {
   grid-template-rows: 150px;
   justify-items: center;
   align-items: end;
-  background-image: url('https://www.wallpaperflare.com/static/201/847/810/landscape-firewatch-flying-mountains-wallpaper.jpg');
   background-size: cover;
   background-position: center;
   padding-bottom:10px;
@@ -187,6 +186,10 @@ form {
   margin: 0.3em 0;
   padding: 1.5em 0;
   background-color: lightgray;
+}
+.profile-nobio {
+  font-style: italic;
+  color: rgba(0,0,0,0.5);
 }
 
 /* */

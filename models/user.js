@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-
+ 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
@@ -28,13 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     userName: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(18),
       allowNull: false,
+      unique:true,
       validate: {
         notNull: true
       }
     },
-    preferredName: DataTypes.STRING,
+    preferredName: DataTypes.STRING(18),
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -47,7 +48,9 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.ENUM,
       values: ['Aquarius','Pisces','Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn',"Don't know/Don't care"],
     },
-      image: DataTypes.STRING
+      image: DataTypes.STRING,
+      banner: DataTypes.STRING,
+      bio: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'User',

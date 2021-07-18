@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
@@ -6,29 +7,30 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV1
+        defaultValue: Sequelize.UUIDV4,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       userName: {
+        type: Sequelize.STRING(18),
+        allowNull: false,
+        unique: true
+      },
+      preferredName: Sequelize.STRING(18),
+      password: {
         type: Sequelize.STRING
       },
-      pwDigest: {
-        type: Sequelize.STRING
-      },
-      preferredName: {
-        type: Sequelize.STRING
-      },
-      zipCode: {
-        type: Sequelize.INTEGER(5)
-      },
+      zipCode: Sequelize.STRING,
       zodiac: {
-        type: Sequelize.ENUM('Aquarius','Pisces','Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn',"Don't know/Don't care")
+        type: Sequelize.ENUM,
+        values: ['Aquarius','Pisces','Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn',"Don't know/Don't care"],
       },
-      image: {
-        type: Sequelize.STRING
-      },
+      image: Sequelize.STRING,
+      banner: Sequelize.STRING,
+      bio: Sequelize.TEXT,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

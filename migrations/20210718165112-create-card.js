@@ -1,32 +1,41 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('entries', {
+    await queryInterface.createTable('cards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userID: {
-        type: Sequelize.UUID,
+      deckID: {
+        type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'users',
-          key: 'userID'
+          model: 'decks',
+          key: 'deckID'
         }
       },
-      read: {
-        type: Sequelize.ARRAY(Sequelize.TEXT)
-      },
-      entryTitle: {
+      cardName: {
         type: Sequelize.STRING
       },
-      entryBody: {
+      frontImage: {
+        type: Sequelize.STRING
+      },
+      frontImageInv: {
+        type: Sequelize.STRING
+      },
+      cardArtist: {
+        type: Sequelize.STRING
+      },
+      cardUpDef: {
         type: Sequelize.TEXT
       },
-      entryIcon: {
-        type: Sequelize.STRING
+      cardInvDef: {
+        type: Sequelize.TEXT
+      },
+      cardDetails: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +48,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('entries');
+    await queryInterface.dropTable('cards');
   }
 };

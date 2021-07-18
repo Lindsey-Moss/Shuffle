@@ -7,7 +7,7 @@ const DeckSummary = (props) => {
     <div className="deck-summary-card" onClick={ () => { setDeck(deck.deckID) } }>
       <h3>{ deck.deckName }</h3>
       <img src={ deck.backImage } alt="" width="200" />
-      <p>{ deck.deckDetails }</p>
+      <p>{ deck.deckSummary }</p>
     </div>
 
   )

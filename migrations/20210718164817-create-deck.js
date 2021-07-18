@@ -11,11 +11,23 @@ module.exports = {
       deckName: {
         type: Sequelize.STRING
       },
+      backImage: {
+        type: Sequelize.STRING
+      },
+      backImgInv: {
+        type: Sequelize.STRING
+      },
       deckArtist: {
         type: Sequelize.STRING
       },
+      deckSummary: {
+        type: Sequelize.TEXT
+      },
       deckDetails: {
         type: Sequelize.TEXT
+      },
+      deckLink: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
