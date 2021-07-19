@@ -93,7 +93,7 @@ const Auth = (props) => {
         <div>{/*spacer for navbar*/}</div>
         <div className="auth-form-wrapper">
           <button onClick={()=>{setFormType(false)}}>Log In</button> or <button onClick={()=>{setFormType(true)}}>Sign Up</button>
-          <form className="auth-form">
+          <form className="auth-form" onSubmit={(props.authState.needRegister) ? (handleSubmitRegister) : (handleSubmitLogin)}>
             {props.authState.needRegister ? (<input
                 type="email"
                 name="email"

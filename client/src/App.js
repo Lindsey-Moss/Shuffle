@@ -70,7 +70,7 @@ function App(props) {
             />
           )}
         />
-        <Route path="/auth/" component={Auth} />
+        <Route path="/auth/" render={Auth} />
 
         <Route exact path="/profile" render={(props) => (
           <Profile {...props}

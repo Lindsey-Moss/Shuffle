@@ -215,16 +215,24 @@ const ProfileDetails = (props) => {
   }
 
   return (
+    <>
+      <div className="profile-detail-box">
+        <div className="profile-editbtn-box">
+          <button className="profile-editbtn">Edit Profile</button>
+        </div>
+        <div className="profile-details">
+          { (user.createdAt) ? (<h6>journaling since { changeDate(user.createdAt) }</h6>) : (null) }
+          { (user.zipCode && user.zipCode !== 0) ? (<h6>keeping their mind clear in { getState(user.zipCode) }</h6>) : (null) }
+        </div>
+      </div>
+      <div className="profile-edit-user">
 
-    <div className="profile-detail-box">
-      <div className="profile-editbtn-box">
-        <button className="profile-editbtn">Edit Profile</button>
+        {//// and this is where I'll put the form and inputs to autopop from userState as placeholder, then changes will update userState.updateUser object
+          //// note to self: on submit of form, check for any left blank. ONLY submit to PUT request those that have been changed
+        }
+
       </div>
-      <div className="profile-details">
-        { (user.createdAt) ? (<h6>journaling since { changeDate(user.createdAt) }</h6>) : (null) }
-        { (user.zipCode && user.zipCode !== 0) ? (<h6>keeping their mind clear in { getState(user.zipCode) }</h6>) : (null) }
-      </div>
-    </div>
+    </>
 
   )
 }
