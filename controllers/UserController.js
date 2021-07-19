@@ -19,19 +19,6 @@ const GetUserByID = async (req, res) => {
   }
 }
 
-// const GetUserByEmail = async (req, res) => {
-//   try {
-//     let userEmail = req.params.email
-//     let userByEmail = await User.findAll({
-//       where: { email: userEmail },
-//       returning: true
-//     })
-//     res.send(userByEmail)
-//   } catch (error) {
-//     throw error
-//   }
-// }
-
 const UpdateUser = async (req, res) => {
   try {
     let userID = req.params.userID
