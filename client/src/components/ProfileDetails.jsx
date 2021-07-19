@@ -190,41 +190,46 @@ const ProfileDetails = (props) => {
   }
 
   const changeDate = (ISOdate) => {
-    let dateParts = ISOdate.split("-");
-    let newDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2))
-    let month = newDate.getMonth() + 1
-    const monthString = (month) => {
-      switch (month) {
-        case 1:
-          return 'January'
-        case 2:
-          return 'February'
-        case 3:
-          return 'March'
-        case 4:
-          return 'April'
-        case 5:
-          return 'May'
-        case 6:
-          return 'June'
-        case 7:
-          return 'July'
-        case 8:
-          return 'August'
-        case 9:
-          return 'September'
-        case 10:
-          return 'October'
-        case 11:
-          return 'November'
-        case 12:
-          return 'December'
-        default:
-          return
+    if (ISOdate) {
+      let dateParts = ISOdate.split("-");
+      let newDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2))
+      let month = newDate.getMonth() + 1
+      const monthString = (month) => {
+        switch (month) {
+          case 1:
+            return 'January'
+          case 2:
+            return 'February'
+          case 3:
+            return 'March'
+          case 4:
+            return 'April'
+          case 5:
+            return 'May'
+          case 6:
+            return 'June'
+          case 7:
+            return 'July'
+          case 8:
+            return 'August'
+          case 9:
+            return 'September'
+          case 10:
+            return 'October'
+          case 11:
+            return 'November'
+          case 12:
+            return 'December'
+          default:
+            return
+        }
       }
+      let dateWithoutTime = (monthString(month) + ' ' + newDate.getFullYear())
+      return dateWithoutTime;
+    } else {
+      changeDate(ISOdate)
     }
-    let dateWithoutTime = (monthString(month) + ' ' + newDate.getFullYear())
-    return dateWithoutTime;
+
   }
 
   const handleChange = (e) => {
@@ -329,7 +334,7 @@ const ProfileDetails = (props) => {
           />
           <h6>Zodiac:</h6>
           <select name="zodiac"
-            value={ user.zodiac }
+            value={ userState.updateUser.zodiac || '' }
             onChange={ handleChange }
           >
             <option></option>
@@ -365,7 +370,7 @@ const ProfileDetails = (props) => {
           <textarea
             type="text"
             name="bio"
-            value={ userState.updateUser.bio }
+            value={ userState.updateUser.bio || '' }
             rows="10"
             maxLength="2000"
             onChange={ handleChange }

@@ -14,7 +14,7 @@ const Entry = (props) => {
 
     <div className="entry-card">
       <button
-        onClick={ () => { props.deleteThisEntry(props.authState.thisUser, props.entry.id) } }
+        onClick={ () => { props.deleteThisEntry(props.userID, props.entry.id) } }
         className="delete-entry-btn">
         <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-512.png" width="20" />
       </button>

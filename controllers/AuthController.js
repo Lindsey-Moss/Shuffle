@@ -5,7 +5,9 @@ const Register = async (req, res) => {
   try {
     const { email, userName, preferredName, password, zipCode, zodiac } = req.body
     let passwordDigest = await middleware.hashPassword(password)
-    const user = await User.create({ email, userName, preferredName, password: passwordDigest, zipCode, zodiac })
+    let image = 'http://getdrawings.com/free-icon-bw/free-avatars-icons-25.png'
+    let banner = 'https://cdn.imgbin.com/6/7/6/imgbin-simple-background-art-VzjSrPriLj7NfAFEtkNEW0rvi.jpg'
+    const user = await User.create({ email, userName, preferredName, password: passwordDigest, zipCode, zodiac, image, banner })
     res.send(user)
   } catch (error) {
     throw error

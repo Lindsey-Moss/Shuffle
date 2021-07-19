@@ -53,7 +53,7 @@ const Nav = (props) => {
           { (props.navState.on === 'profile') ? (null) : (<button className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPath() } }>Profile</button>) }
           <button className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPath() } }>Journal</button>
           <button className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPath() } }>Write a New Entry</button>
-          <button className="navbar-btn" onClick={ props.logOut }> Log Out </button>
+          <button className="navbar-btn" onClick={ () => { props.logOut() } }> Log Out </button>
         </>
       ) : (
         <>

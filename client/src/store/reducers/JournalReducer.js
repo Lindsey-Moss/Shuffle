@@ -31,7 +31,7 @@ const JournalReducer = (state = iState, action) => {
     case DELETE_ENTRY:
       return {
         ...state, 
-        viewingEntries: state.viewingEntries.filter((entry) => entry.entryID !== action.payload)
+        viewingEntries: [...state.viewingEntries.filter((entry) => entry.entryID !== action.payload)]
       }
     case UPDATE_ENTRY:
       let targetEntryIndex = state.viewingEntries.findIndex(entry => entry.entryID === action.payload.entryID)

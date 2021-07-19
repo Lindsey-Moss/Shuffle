@@ -22,7 +22,7 @@ const iState = {
 const UserReducer = (state = iState, action) => {
   switch (action.type) {
     case GET_USER_INFO:
-      return { ...state, thisUsersInfo: action.payload, updateUser: {...state.updateUser, bio: action.payload.bio }}
+      return { ...state, thisUsersInfo: action.payload, updateUser: {...state.updateUser, bio: action.payload.bio, zodiac: ((action.payload.zodiac) ? (action.payload.zodiac) : ('')) }}
     case EDIT_USER_FORM:
       return { ...state, updateUser: {...state.updateUser, [action.payload.name]:action.payload.value}}
     case UPDATE_USER:

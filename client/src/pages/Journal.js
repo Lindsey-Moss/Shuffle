@@ -38,17 +38,23 @@ const Journal = (props) => {
   }
 
   const deleteThisEntry = (userID, entryID) => {
-    let confirm = prompt("Are you sure you want to delete this entry? There will be no recovering it after it is deleted it; everything you've written and the read data will all be erased permanently. Is that ok?")
-    if (confirm){
+    let userConfirm = window.confirm("Are you sure you want to delete this entry? There will be no recovering it after it is deleted it; everything you've written and the read data will all be erased permanently. Is that ok?")
+    if (userConfirm){
       props.deleteThis(userID, entryID)
-      props.history.push('/journal')
+      window.location.assign('/journal')
     } else {alert('Ok, the entry will NOT be deleted. :)')}
   }
 
   useEffect(() => {
-    getToken().then(showAllEntries(authState.thisUser));
-    checkSide()
+    let loading = true;
+    getToken();
+    if(authState.thisUser){
+      loading = false
+    }
+    if(loading=false){showAllEntries(authState.thisUser);
+    checkSide()}
   },[])
+
 
 
   return (
@@ -59,7 +65,7 @@ const Journal = (props) => {
         
         <main className="journal-main">  
         {props.journalState.viewingEntries.map((entry)=>{
-          return <Entry entry={entry} key={entry.id} deleteThisEntry={deleteThisEntry}/>
+          return <Entry entry={entry} key={entry.id} deleteThisEntry={deleteThisEntry} history={props.history} userID={props.authState.thisUser}/>
         })}
   
         </main>
