@@ -1,8 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { UpdateUserAction, UserFormField, DeleteUserAction } from '../store/actions/UserActions'
 
+
+const mapStateToProps = ({ userState, authState }) => {
+  return { userState, authState }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUpdateForm: (formName, formValue) => dispatch(UserFormField(formName, formValue)),
+    sendUpdates: (userID, userForm) => dispatch(UpdateUserAction(userID, userForm))
+  }
+}
 
 const ProfileDetails = (props) => {
-  const { user } = props
+  const { user, userState, authState } = props
 
   const getState = (zipString) => {
     let zipcode = parseInt(zipString, 10);
@@ -214,26 +227,154 @@ const ProfileDetails = (props) => {
     return dateWithoutTime;
   }
 
+  const handleChange = (e) => {
+    props.setUpdateForm(e.target.name, e.target.value)
+  }
+
+  const handleSubmitUpdate = async (e) => {
+    e.preventDefault()
+    await props.sendUpdates(authState.thisUser, {
+      email: userState.updateUser.email || userState.thisUsersInfo.email,
+      userName: userState.updateUser.userName || userState.thisUsersInfo.userName,
+      preferredName: userState.updateUser.preferredName || userState.thisUsersInfo.preferredName,
+      zipCode: userState.updateUser.zipCode || userState.thisUsersInfo.zipCode,
+      zodiac: userState.updateUser.zodiac || userState.thisUsersInfo.zodiac,
+      image: userState.updateUser.image || userState.thisUsersInfo.image,
+      banner: userState.updateUser.banner || userState.thisUsersInfo.banner,
+      bio: userState.updateUser.bio || userState.thisUsersInfo.bio
+    })
+    props.history.push('/profile')
+    toggleEdit(e)
+  }
+
+  const toggleEdit = (e) => {
+    e.preventDefault()
+    let editarea = document.querySelector('.profile-edit-user')
+    let startEdit = document.querySelector('.profile-editbtn')
+    let endEdit = document.querySelector('.profile-editbtn-off')
+    let submit = document.querySelector('.profile-editbtn-submit')
+    if (editarea.classList.contains('hide-form')) {
+      editarea.classList.remove('hide-form')
+      editarea.classList.add('show-form')
+      startEdit.classList.remove('show-button')
+      startEdit.classList.add('hide-button')
+      endEdit.classList.remove('hide-button')
+      endEdit.classList.remove('hide-button')
+      submit.classList.add('show-button')
+      submit.classList.add('show-button')
+    } else if (editarea.classList.contains('show-form')) {
+      editarea.classList.add('hide-form')
+      editarea.classList.remove('show-form')
+      startEdit.classList.add('show-button')
+      startEdit.classList.remove('hide-button')
+      endEdit.classList.add('hide-button')
+      endEdit.classList.add('hide-button')
+      submit.classList.remove('show-button')
+      submit.classList.remove('show-button')
+    }
+  }
+
   return (
     <>
       <div className="profile-detail-box">
         <div className="profile-editbtn-box">
-          <button className="profile-editbtn">Edit Profile</button>
+          <button className="profile-editbtn" onClick={ toggleEdit }>Edit Profile</button>
+          <button className="profile-editbtn-submit hide-button" onClick={ handleSubmitUpdate }>Submit Changes</button>
+          <button className="profile-editbtn-off hide-button" onClick={ toggleEdit }>Cancel Edit</button>
         </div>
         <div className="profile-details">
           { (user.createdAt) ? (<h6>journaling since { changeDate(user.createdAt) }</h6>) : (null) }
           { (user.zipCode && user.zipCode !== 0) ? (<h6>keeping their mind clear in { getState(user.zipCode) }</h6>) : (null) }
         </div>
       </div>
-      <div className="profile-edit-user">
+      <div className="profile-edit-user hide-form">
 
-        {//// and this is where I'll put the form and inputs to autopop from userState as placeholder, then changes will update userState.updateUser object
-          //// note to self: on submit of form, check for any left blank. ONLY submit to PUT request those that have been changed
-        }
+        <form className="profile-edit-user-form">
+          <h6>Preferred Name:</h6>
+          <input
+            type="text"
+            name="preferredName"
+            onInput={ (e) => {
+              e.target.value = (e.target.value).slice(0, 18)
+            } }
+            placeholder={ user.preferredName }
+            onChange={ handleChange }
+          />
+          <h6>Username:</h6>
+          <input
+            type="text"
+            name="userName"
+            onInput={ (e) => {
+              e.target.value = (e.target.value).slice(0, 18)
+            } }
+            placeholder={ user.userName }
+            onChange={ handleChange }
+          />
+          <h6>Email Address:</h6>
+          <input
+            type="text"
+            name="email"
+            placeholder={ user.email }
+            onChange={ handleChange }
+          />
+          <h6>Zipcode:</h6>
+          <input
+            type="number"
+            name="zipCode"
+            onInput={ (e) => {
+              e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 5)
+            } }
+            onChange={ handleChange }
+            placeholder={ user.zipCode }
+          />
+          <h6>Zodiac:</h6>
+          <select name="zodiac"
+            value={ user.zodiac }
+            onChange={ handleChange }
+          >
+            <option></option>
+            <option value="Aquarius">Aquarius</option>
+            <option value="Pisces">Pisces</option>
+            <option value="Aries">Aries</option>
+            <option value="Taurus">Taurus</option>
+            <option value="Gemini">Gemini</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Leo">Leo</option>
+            <option value="Virgo">Virgo</option>
+            <option value="Libra">Libra</option>
+            <option value="Scorpio">Scorpio</option>
+            <option value="Sagittarius">Sagittarius</option>
+            <option value="Capricorn">Capricorn</option>
+            <option value="Don't know/Don't care">Don't know/Don't care</option>
+          </select>
+          <h6>Avatar Image:</h6>
+          <input
+            type="text"
+            name="image"
+            placeholder={ user.image }
+            onChange={ handleChange }
+          />
+          <h6>Profile Banner Image:</h6>
+          <input
+            type="text"
+            name="banner"
+            placeholder={ user.banner }
+            onChange={ handleChange }
+          />
+          <h6>Bio:</h6>
+          <textarea
+            type="text"
+            name="bio"
+            value={ userState.updateUser.bio }
+            rows="10"
+            maxLength="2000"
+            onChange={ handleChange }
+          />
+        </form>
 
       </div>
     </>
 
   )
 }
-export default ProfileDetails
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileDetails)

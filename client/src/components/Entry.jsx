@@ -13,7 +13,11 @@ const Entry = (props) => {
   return (
 
     <div className="entry-card">
-
+      <button
+        onClick={ () => { props.deleteThisEntry(props.authState.thisUser, props.entry.id) } }
+        className="delete-entry-btn">
+        <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-512.png" width="20" />
+      </button>
       <h3><img src={ props.entry.entryIcon } alt={ props.entry.entryIcon } />{ props.entry.entryTitle }</h3>
       { (props.entry.read && (props.entry.read[0] !== '')) ? (<ul>{ props.entry.read.map((card, index) => {
         return <li key={ index }>{ card }</li>

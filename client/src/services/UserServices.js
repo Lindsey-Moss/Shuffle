@@ -12,7 +12,7 @@ export const GetUser = async (userID) => {
 export const UpdateUser = async (userID, userForm) => {
   try {
     const res = await API.put(`users/${userID}`, userForm)
-    return res.data
+    return res.data[1][0]
   } catch (error) {
     throw error
   }

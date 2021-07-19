@@ -70,8 +70,10 @@ function App(props) {
             />
           )}
         />
-        <Route path="/auth/" render={Auth} />
-
+        <Route path="/auth/" render={(props) => (
+          <Auth {...props} />
+        )}
+        />
         <Route exact path="/profile" render={(props) => (
           <Profile {...props}
             history={history}

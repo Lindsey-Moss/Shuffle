@@ -52,6 +52,7 @@ form {
   color: white;
 }
 
+
 /* */
 
 /* ---- HOMEPAGE ---- */
@@ -95,6 +96,7 @@ form {
 }
 
 .profile-column{
+  height: 100%;
   width: 70%;
   min-width: 450px;
   height: 100%;
@@ -197,7 +199,7 @@ form {
 
 .profile-about-box {
   margin: 0.3em 0;
-  padding: 1.5em 0;
+  padding: 1.5em 0.5em;
   background-color: lightgray;
 }
 .profile-nobio {
@@ -291,9 +293,19 @@ form {
 /* ---- ENTRY ---- */
 
 .entry-card {
+  display: flex;
+  flex-flow: column wrap;
+  text-align: justify;
+  justify-content: flex-start;
+  align-items: flex-start;
   border: 2px dashed red;
   margin: 1em;
   padding: 0.5em;
+}
+
+.delete-entry-btn {
+  position:absolute;
+  align-self:flex-end;
 }
 
 /* */
@@ -316,6 +328,54 @@ form {
   height: 30%;
   background-color: lavender;
   padding: 1em;
+}
+
+/* */
+
+/* ---- PROFILE DETAILS ---- */
+
+.profile-editbtn-box {
+  display: flex;
+  justify-content: center;
+}
+.profile-edit-user {
+  display: none;
+  padding: 1em;
+  height:40%;
+  overflow: auto;
+  margin-bottom: 1em;
+  border-top:darkgrey 1px dashed;
+  border-bottom:darkgrey 1px dashed;
+}
+
+.profile-edit-user-form {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: repeat(8, 50px);
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.profile-edit-user-form h6, input, select, textarea {
+  margin: 0.5em;
+}
+
+.profile-edit-user-form textarea {
+  resize: none;
+  align-self: start;
+  margin-bottom: 0.5em;
+}
+.profile-editbtn, .profile-editbtn-off, .profile-editbtn-submit {
+  font-size: 0.6em;
+}
+.show-form{
+  display: block;
+}
+.hide-form, .hide-button{
+  display: none;
+}
+.show-button{
+  display:inline;
 }
 
 /* */

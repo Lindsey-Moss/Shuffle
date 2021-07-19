@@ -33,21 +33,19 @@ const Profile = (props) => {
     props.toggleNav(props.navState.navOpen)
   }
 
-  // for onSubmit of edits, make sure to ONLY send back fields from userState.updateUser that != '' !
-
   useEffect(() => {
-    getToken();
-    fetchUser(authState.thisUser);
+    getToken().then(fetchUser(authState.thisUser));
     checkSide()
-  },[authState.isAuthenticated])
+  },[])
 
   return (
     <>
       {authState.isAuthenticated && user ? (
         <div className="profile-page leave-room-for-jesus-i-mean-navbar">
+          
           <div>{/*spacer for navbar*/}</div>
           <main className="profile-main">
-            
+          
             <div className="profile-column">
               <div className="profile-top" style={{backgroundImage:`url(${user.banner})`}}>
                 <div className="profile-image-box">
@@ -58,7 +56,7 @@ const Profile = (props) => {
                   <h3>{ user.userName }</h3>
                 </div>
               </div>
-              <ProfileDetails user={user}/>
+              <ProfileDetails user={user} history={props.history}/>
               
               <div className="profile-about-box">
                 <h2>About</h2>

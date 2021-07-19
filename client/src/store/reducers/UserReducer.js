@@ -8,33 +8,27 @@ import {
 const iState = {
   thisUsersInfo: {},
   updateUser: {
-    email: '',
-    userName: '',
-    preferredName: '',
-    zipCode: '',
-    zodiac: '',
-    image: ''
+    email: null,
+    userName: null,
+    preferredName: null,
+    zipCode: null,
+    zodiac: null,
+    image: null,
+    banner:null,
+    bio:null
   }
 }
 
 const UserReducer = (state = iState, action) => {
   switch (action.type) {
     case GET_USER_INFO:
-      return { ...state, thisUsersInfo: action.payload }
+      return { ...state, thisUsersInfo: action.payload, updateUser: {...state.updateUser, bio: action.payload.bio }}
     case EDIT_USER_FORM:
       return { ...state, updateUser: {...state.updateUser, [action.payload.name]:action.payload.value}}
     case UPDATE_USER:
       return { 
         ...state, 
-        thisUsersInfo: action.payload,
-        updateUser: {
-          email: '',
-          userName: '',
-          preferredName: '',
-          zipCode: '',
-          zodiac: '',
-          image: ''
-      }}
+        thisUsersInfo: action.payload}
     case DELETE_USER:
       return { 
         ...state, 
