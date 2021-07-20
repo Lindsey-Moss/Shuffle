@@ -5,7 +5,6 @@ import {
   LOGIN,
   TOGGLE_AUTH
 } from '../types'
-
 const iState = {
   needRegister: false,
   email: '',
@@ -15,13 +14,12 @@ const iState = {
   zipCode: '',
   zodiac: '',
   isAuthenticated: false,
-  thisUser: null
+  thisUser: null,
 }
-
 const AuthReducer = (state = iState, action) => {
   switch (action.type) {
     case TOGGLE_AUTH:
-      return {...state, needRegister: action.payload }
+      return { ...state, needRegister: action.payload }
     case AUTH_FORM:
       return { ...state, [action.payload.name]: action.payload.value }
     case REGISTER:
@@ -29,10 +27,9 @@ const AuthReducer = (state = iState, action) => {
     case LOGIN:
       return { ...state, thisUser: action.payload }
     case AUTHENTICATED:
-      return { ...state, isAuthenticated: action.payload }
+      return { ...state, thisUser: action.payload, isAuthenticated: true }
     default:
       return { ...state }
   }
 }
-
 export default AuthReducer

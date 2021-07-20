@@ -183,7 +183,6 @@ const ProfileDetails = (props) => {
     } else {
       st = 'none';
       state = 'none';
-      console.log('No state found matching', zipcode);
     }
 
     return state;
@@ -284,7 +283,6 @@ const ProfileDetails = (props) => {
       <div className="profile-detail-box">
         <div className="profile-editbtn-box">
           <button className="profile-editbtn" onClick={ toggleEdit }>Edit Profile</button>
-          <button className="profile-editbtn-submit hide-button" onClick={ handleSubmitUpdate }>Submit Changes</button>
           <button className="profile-editbtn-off hide-button" onClick={ toggleEdit }>Cancel Edit</button>
         </div>
         <div className="profile-details">
@@ -295,6 +293,7 @@ const ProfileDetails = (props) => {
       <div className="profile-edit-user hide-form">
 
         <form className="profile-edit-user-form">
+
           <h6>Preferred Name:</h6>
           <input
             type="text"
@@ -375,6 +374,9 @@ const ProfileDetails = (props) => {
             maxLength="2000"
             onChange={ handleChange }
           />
+          <div>
+            <button className="profile-editbtn-submit hide-button" onClick={ handleSubmitUpdate }>Submit Changes</button>
+          </div>
         </form>
 
       </div>

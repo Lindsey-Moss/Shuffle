@@ -1,6 +1,7 @@
 import { 
   SignUp,
-  LogIn
+  LogIn,
+  __CheckSession
  } from '../../services/AuthServices'
 
 import {
@@ -53,7 +54,14 @@ export const SignIn = (authForm) => async (dispatch) => {
   }
 }
 
-export const SessionChecked = (payload) => ({
-  type: AUTHENTICATED,
-  payload: payload
-})
+export const SessionChecked = () => async (dispatch) => {
+  try {
+      const loggedUser = await __CheckSession()
+      dispatch({
+          type: AUTHENTICATED,
+          payload: loggedUser.id
+      })
+  } catch (error) {
+      throw error
+  }
+}
