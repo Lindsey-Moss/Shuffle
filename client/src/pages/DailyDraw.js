@@ -6,16 +6,20 @@ import {
   LoadDailyDeck
 } from '../store/actions/TarotActions'
 import {
-  SetReadInfo
+  SetReadInfo,
+  AutoSaveDailyEntry
 } from '../store/actions/JournalActions'
 import DeckSummary from '../components/DeckSummary'
 import {
   SetFrom,
   ToggleNav
 } from '../store/actions/NavActions'
+import {
+  
+} from '../store/actions/JournalActions'
 
-const mapStateToProps = ({ tarotState, navState }) => {
-  return { tarotState, navState }
+const mapStateToProps = ({ tarotState, navState, authState }) => {
+  return { tarotState, navState, authState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -25,16 +29,35 @@ const mapDispatchToProps = (dispatch) => {
     setDeck: (deckID) => dispatch(LoadDailyDeck(deckID)),
     setReadForJournal: (read)=> dispatch(SetReadInfo(read)),
     setFrom: (string) => dispatch(SetFrom(string)),
-    toggleNav: (bool) => dispatch(ToggleNav(bool))
+    toggleNav: (bool) => dispatch(ToggleNav(bool)),
+    autosaveDaily: (userID,entry) => dispatch(AutoSaveDailyEntry(userID,entry))
   }
 }
 
 const DailyDraw = (props) => {
   const {fetchDecks} = props
 
-  const showCard= () => {
+  const showCard = async () => {
     let reveal = document.querySelector('.daily-reveal')
     reveal.style.display = 'block'
+    if(props.authState.thisUser){
+      let reading = props.tarotState.theDaily.cardName
+      if(!props.tarotState.dailyCardUpright){
+        reading+=' - Inverted'
+      }
+      try{
+        await props.autosaveDaily(props.authState.thisUser,{
+        userID: props.authState.thisUser,
+        read: [reading],
+        entryTitle: 'Daily Draw',
+        entryBody: '',
+        entryIcon: 'ddd',
+        inJournal: 0
+      })
+    } catch (error) {
+      console.log('Autosave failed.',error)
+    }
+    }
   }
 
   const toJournal = () => {
@@ -59,11 +82,9 @@ const DailyDraw = (props) => {
 
   return (
     <div className="dailydraw-page leave-room-for-jesus-i-mean-navbar">
-
       <div>{/*spacer for navbar*/}</div>
 
       <main className="dailydraw-main">
-      This is where you can get your daily draw! Only once a day tho
 
       {(props.tarotState.dailyDeck) ? (null):(
         props.tarotState.allDecks.map((deck) => {

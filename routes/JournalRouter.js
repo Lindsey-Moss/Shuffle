@@ -2,6 +2,7 @@ const Router = require('express').Router()
 const controller = require('../controllers/JournalController')
 
 Router.get('/all', controller.GetAllEntriesEver)
+Router.get('/isDaily/:userID', controller.GetDailyDrawToday)
 Router.get('/:userID/all', controller.GetAllEntriesForUser)
 Router.get('/:userID/by/:icon', controller.GetEntriesByIcon)
 Router.get('/:userID/filter/:string', controller.GetEntriesByFilter)

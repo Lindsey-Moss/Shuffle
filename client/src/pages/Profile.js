@@ -46,7 +46,6 @@ const Profile = (props) => {
           
           <div>{/*spacer for navbar*/}</div>
           <main className="profile-main">
-          
             <div className="profile-column">
               <div className="profile-top" style={{backgroundImage:`url(${user.banner})`}}>
                 <div className="profile-image-box">

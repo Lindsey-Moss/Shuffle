@@ -184,7 +184,7 @@ const ProfileDetails = (props) => {
       st = 'none';
       state = 'none';
     }
-
+    console.log(st)
     return state;
   }
 

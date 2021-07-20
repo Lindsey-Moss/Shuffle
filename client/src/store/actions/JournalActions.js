@@ -1,6 +1,7 @@
 import { 
   DeleteEntry,
   GetAllUsersEntries, 
+  GetDailyDrawToday, 
   GetFilteredEntries, 
   GetIconEntries, 
   PostNewEntry,
@@ -8,8 +9,10 @@ import {
 } from '../../services/JournalServices'
 
 import { 
+  CHECK_FOR_DAILY,
   ENTRY_FORM,
   SET_READ_INFO,
+  AUTOSAVE,
   POST_ENTRY,
   SET_ENTRIES,
   TOGGLE_EDIT_ENTRY,
@@ -58,6 +61,20 @@ export const LoadAllUserEntries = (userID) => {
   }
 }
 
+export const CheckForDaily = (userID) => {
+  return async (dispatch) => {
+    try {
+      const result = await GetDailyDrawToday(userID)
+      dispatch({
+        type: CHECK_FOR_DAILY,
+        payload: result 
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
 export const LoadFilteredEntries = (userID, string) => {
   return async (dispatch) => {
     try {
@@ -92,6 +109,20 @@ export const PostNewEntryAction = (userID, entryForm) => {
       const posted = await PostNewEntry(userID, entryForm)
       dispatch({
         type: POST_ENTRY,
+        payload: posted
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+export const AutoSaveDailyEntry = (userID, entryForm) => {
+  return async (dispatch) => {
+    try {
+      const posted = await PostNewEntry(userID, entryForm)
+      dispatch({
+        type: AUTOSAVE,
         payload: posted
       })
     } catch (error) {

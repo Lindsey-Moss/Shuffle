@@ -9,6 +9,16 @@ export const GetAllUsersEntries = async (userID) => {
   }
 }
 
+export const GetDailyDrawToday = async (userID) => {
+  try {
+    const res = await API.get(`journal/isDaily/${userID}`)
+    console.log(res)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const GetFilteredEntries = async (userID, string) => {
   try {
     const res = await API.get(`journal/${userID}/filter/${string}`)

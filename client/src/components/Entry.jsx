@@ -32,18 +32,18 @@ const Entry = (props) => {
             <button
               onClick={ () => { props.deleteThisEntry(props.userID, props.entry.id) } }
               className="delete-entry-btn">
-              <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-512.png" width="20" />
+              <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-512.png" alt="Delete Entry" width="20" />
             </button>
             <button
               onClick={ () => { props.toggleEdit(props.entry) } }
               className="edit-entry-btn">
-              <img src="http://cdn.onlinewebfonts.com/svg/img_557136.png" width="20" />
+              <img src="http://cdn.onlinewebfonts.com/svg/img_557136.png" alt="Toggle Editing This Entry" width="20" />
             </button>
           </>) : (null) }
         { ((!props.journalState.editing) ? (<button
           onClick={ () => { props.toggleEdit(props.entry) } }
           className="edit-entry-btn">
-          <img src="http://cdn.onlinewebfonts.com/svg/img_557136.png" width="20" />
+          <img src="http://cdn.onlinewebfonts.com/svg/img_557136.png" alt="Toggle Editing This Entry" width="20" />
         </button>) : (null)) }
 
       </div>

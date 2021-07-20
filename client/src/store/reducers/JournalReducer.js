@@ -2,6 +2,7 @@ import {
   SET_ENTRIES,
   ENTRY_FORM,
   SET_READ_INFO,
+  AUTOSAVE,
   POST_ENTRY,
   TOGGLE_EDIT_ENTRY,
   EDIT_ENTRY_FORM,
@@ -39,6 +40,10 @@ const JournalReducer = (state = iState, action) => {
         entryBody:'',
         entryIcon:null
       }
+    case AUTOSAVE:
+      console.log(`Daily draw autosaved successfully.`)
+      console.log(action.payload)
+      return {...state}
     case DELETE_ENTRY:
       return {
         ...state, 

@@ -95,6 +95,10 @@ form {
   justify-content: center;
 }
 
+.delete-user-btn {
+  align-self: flex-end;
+}
+
 .profile-column{
   height: 100%;
   width: 70%;

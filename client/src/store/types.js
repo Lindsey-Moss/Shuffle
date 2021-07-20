@@ -7,6 +7,7 @@ export const TOGGLE_AUTH = 'TOGGLE_AUTH'
 
 //// JOURNAL
 export const ENTRY_FORM = 'ENTRY_FORM'
+export const AUTOSAVE = 'AUTOSAVE'
 export const POST_ENTRY = 'POST_ENTRY'
 export const SET_ENTRIES = 'SET_ENTRIES'
 export const TOGGLE_EDIT_ENTRY = 'TOGGLE_EDIT_ENTRY'
@@ -15,6 +16,7 @@ export const UPDATE_ENTRY = 'UPDATE_ENTRY'
 export const DELETE_ENTRY = 'DELETE_ENTRY'
 export const SET_READ_INFO = 'SET_READ_INFO'
 export const SET_ENTRY_TITLE = 'SET_ENTRY_TITLE'
+export const CHECK_FOR_DAILY = 'CHECK_FOR_DAILY'
 
 //// TAROT
 export const ALL_DECKS = 'ALL_DECKS'
