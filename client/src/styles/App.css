@@ -303,7 +303,7 @@ form {
   padding: 0.5em;
 }
 
-.delete-entry-btn {
+.entry-card-button-box {
   position:absolute;
   align-self:flex-end;
 }

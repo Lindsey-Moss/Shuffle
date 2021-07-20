@@ -32,9 +32,6 @@ function App(props) {
   const history = useHistory()
   const { isAuthenticated } = props.authState
 
-  console.log('AUTH STATE', props.authState)
-  console.log(isAuthenticated)
-
   const getToken = async () => {
     let token = localStorage.getItem('token')
     if (token) {

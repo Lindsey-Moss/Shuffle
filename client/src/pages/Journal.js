@@ -4,7 +4,10 @@ import {
   LoadAllUserEntries,
   LoadFilteredEntries,
   LoadIconEntries,
-  DeleteEntryAction
+  DeleteEntryAction,
+  ToggleEditEntryForm,
+  EditEntryFormField,
+  UpdateEntryAction
 } from '../store/actions/JournalActions'
 import {
   SetFrom,
@@ -24,6 +27,9 @@ const mapDispatchToProps = (dispatch) => {
     showFilteredEntries: (userID,string) => dispatch(LoadFilteredEntries(userID,string)),
     showIconEntries: (userID,icon) => dispatch(LoadIconEntries(userID,icon)),
     deleteThis: (userID,entryID) => dispatch(DeleteEntryAction(userID,entryID)),
+    toggleEdit: (entryobj)=>dispatch(ToggleEditEntryForm(entryobj)),
+    setEditEntryForm: (formName, formValue) => dispatch(EditEntryFormField(formName,formValue)),
+    updateThis: (userID,entryID,editForm) => dispatch(UpdateEntryAction(userID,entryID,editForm)),
     setFrom: (string) => dispatch(SetFrom(string)),
     toggleNav: (bool) => dispatch(ToggleNav(bool))
   }
@@ -45,6 +51,16 @@ const Journal = (props) => {
     } else {alert('Ok, the entry will NOT be deleted. :)')}
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    props.setEditEntryForm(e.target.name, e.target.value)
+  }
+
+  const updateThisEntry = (userID,entryID,editForm) => {
+    props.updateThis(userID,entryID,editForm)
+  }
+
+
   useEffect(() => {
     getToken()
     showAllEntries(authState.thisUser)
@@ -61,7 +77,18 @@ const Journal = (props) => {
         
         <main className="journal-main">  
         {props.journalState.viewingEntries.map((entry)=>{
-          return <Entry entry={entry} key={entry.id} deleteThisEntry={deleteThisEntry} history={props.history} userID={props.authState.thisUser}/>
+          return <Entry 
+            entry={entry} 
+            key={entry.id} 
+            deleteThisEntry={deleteThisEntry}
+            updateThisEntry={updateThisEntry}
+            history={props.history} 
+            userID={props.authState.thisUser} 
+            toggleEdit={props.toggleEdit}
+            journalState={props.journalState}
+            setEditEntryForm={props.setEditEntryForm}
+            handleChange={handleChange}
+            />
         })}
   
         </main>

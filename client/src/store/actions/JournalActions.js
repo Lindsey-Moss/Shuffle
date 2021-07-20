@@ -12,6 +12,8 @@ import {
   SET_READ_INFO,
   POST_ENTRY,
   SET_ENTRIES,
+  TOGGLE_EDIT_ENTRY,
+  EDIT_ENTRY_FORM,
   UPDATE_ENTRY,
   DELETE_ENTRY,
   SET_ENTRY_TITLE
@@ -22,9 +24,19 @@ export const EntryFormField = (formName, formValue) => ({
   payload: { name: formName, value: formValue }
 })
 
+export const EditEntryFormField = (formName, formValue) => ({
+  type: EDIT_ENTRY_FORM,
+  payload: { name: formName, value: formValue }
+})
+
 export const SetReadInfo = (read) => ({
   type: SET_READ_INFO,
   payload: read
+})
+
+export const ToggleEditEntryForm = (entryobj) => ({
+  type: TOGGLE_EDIT_ENTRY,
+  payload: entryobj
 })
 
 export const SetEntryTitle = (string) => ({

@@ -121,6 +121,7 @@ const NewEntry = (props) => {
             />
             <select name="entryIcon"
               defaultValue=''
+              onChange={handleChange}
             >
               <option></option>
               <option value="aaa">A</option>

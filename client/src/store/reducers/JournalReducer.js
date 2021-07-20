@@ -3,12 +3,16 @@ import {
   ENTRY_FORM,
   SET_READ_INFO,
   POST_ENTRY,
+  TOGGLE_EDIT_ENTRY,
+  EDIT_ENTRY_FORM,
   UPDATE_ENTRY,
   DELETE_ENTRY,
   SET_ENTRY_TITLE
  } from '../types'
 
 const iState = {
+  editing: false,
+  editingEntry: {},
   viewingEntries: [],
   read: null,
   entryTitle: '',
@@ -27,11 +31,28 @@ const JournalReducer = (state = iState, action) => {
     case ENTRY_FORM:
       return { ...state, [action.payload.name]: action.payload.value }
     case POST_ENTRY:
-      return { ...state, viewingEntries: [...state.viewingEntries, { ...action.payload }]}
+      return { 
+        ...state, 
+        viewingEntries: [...state.viewingEntries, { ...action.payload }],
+        read:null,
+        entryTitle:'',
+        entryBody:'',
+        entryIcon:null
+      }
     case DELETE_ENTRY:
       return {
         ...state, 
         viewingEntries: [...state.viewingEntries.filter((entry) => entry.entryID !== action.payload)]
+      }
+    case TOGGLE_EDIT_ENTRY:
+      return { ...state, editing: !state.editing, editingEntry: action.payload }
+    case EDIT_ENTRY_FORM:
+      return {
+        ...state, 
+        editingEntry:{
+          ...state.editingEntry, 
+          [action.payload.name]:action.payload.value
+        }
       }
     case UPDATE_ENTRY:
       let targetEntryIndex = state.viewingEntries.findIndex(entry => entry.entryID === action.payload.entryID)
