@@ -34,9 +34,10 @@ const Profile = (props) => {
   }
 
   useEffect(() => {
-    getToken().then(fetchUser(authState.thisUser));
+    getToken()
+    fetchUser(authState.thisUser)
     checkSide()
-  },[])
+  },[authState.isAuthenticated])
 
   return (
     <>

@@ -46,14 +46,10 @@ const Journal = (props) => {
   }
 
   useEffect(() => {
-    let loading = true;
-    getToken();
-    if(authState.thisUser){
-      loading = false
-    }
-    if(loading=false){showAllEntries(authState.thisUser);
-    checkSide()}
-  },[])
+    getToken()
+    showAllEntries(authState.thisUser)
+    checkSide()
+  },[authState.isAuthenticated])
 
 
 

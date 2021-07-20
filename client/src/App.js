@@ -25,13 +25,15 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-////
+////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 function App(props) {
   const history = useHistory()
   const { isAuthenticated } = props.authState
 
   console.log('AUTH STATE', props.authState)
+  console.log(isAuthenticated)
 
   const getToken = async () => {
     let token = localStorage.getItem('token')
@@ -39,18 +41,22 @@ function App(props) {
       props.checkSession()
     }
   }
+
   const openSide = () => {
     props.navState.navOpen ? (props.toggleNav(true)) : (props.toggleNav(true))
   }
+
   const logOut = () => {
     props.setUser(null)
     props.checkSession()
     localStorage.clear()
     window.location.assign('/')
   }
+
   useEffect(() => {
     getToken()
   }, [isAuthenticated])
+
   return (
     <>
       <nav>
