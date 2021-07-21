@@ -42,7 +42,6 @@ const JournalReducer = (state = iState, action) => {
       }
     case AUTOSAVE:
       console.log(`Daily draw autosaved successfully.`)
-      console.log(action.payload)
       return {...state}
     case DELETE_ENTRY:
       return {

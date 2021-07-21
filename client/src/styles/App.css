@@ -87,12 +87,29 @@ form {
   align-items: flex-start;
 }
 .introduction-box{
-  color:rgb(244, 251, 255)
+  padding-top:5em;
+  width: 100%;
+  color:rgb(244, 251, 255);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.introduction-box p{
+  font-size: 1.2em;
+  width: 50%;
+  text-align: justify;
+}
+.intro-bang {
+  font-family:'crookedregular',serif;
+  font-size: 1.5em;
+  vertical-align: middle;
 }
 
 .daily-draw-btn{
     position:fixed;
-    top:50%;
+    top:56%;
     left: 50%;
     font-size: 1.4em;
     padding: 6px 20px;
@@ -441,7 +458,6 @@ form {
 /* ---- JOURNAL ---- */
 
 .journal-page{
-  height: 96.5vh;
   background-image: url('https://www.wallpaperbetter.com/wallpaper/152/302/393/minimalism-gradient-2K-wallpaper-middle-size.jpg');
   background-size: cover;
   background-repeat: none;
