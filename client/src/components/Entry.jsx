@@ -86,7 +86,7 @@ const Entry = (props) => {
 
           { (props.entry.read && (props.entry.read[0] !== '')) ? (
             <div className="entry-read-box" style={ { gridTemplateColumns: ((props.entry.read.length <= 3) ? ("50px 50%") : ("100px 50%")), gridTemplateRows: ((props.entry.read.length <= 3) ? ("65px") : ("100px")) } }>
-              <img src="https://i.imgur.com/XpKaRlW.png" className="" style={ { height: ((props.entry.read.length <= 3) ? ("60px") : ("")) } } />
+              <img src="https://i.imgur.com/XpKaRlW.png" className="" style={ { height: ((props.entry.read.length <= 3) ? ("65px") : ("")) } } />
               <ul className="entry-read-list">{ props.entry.read.map((card, index) => {
                 return <li className="entry-read-card" key={ index }>{ card.replace('- inverted', '↕') } </li>
               }) }</ul>

@@ -5,6 +5,7 @@ import {
   CheckPath,
   ToggleNav
 } from '../store/actions/NavActions'
+import logo from '../styles/shuffle-logo-white.png'
 
 const mapStateToProps = ({ authState, navState }) => {
   return { authState, navState }
@@ -39,21 +40,21 @@ const Nav = (props) => {
       <button className="closebtn" onClick={ () => { closeSide() } }>&#10235;</button>
       <img className="navbar-logo"
         onClick={ () => { props.history.push('/'); checkPath() } }
-        src="https://freesvg.org/img/Placeholder.png"
-        alt="this is where i'd put a logo... if i had one!" />
+        src={ logo }
+        alt="Shuffle" />
 
-      <button className="navbar-btn"
+      <div className="navbar-btn"
         onClick={ () => { props.history.push('/reading'); checkPath() } }
       >
         Reading
-      </button>
+      </div>
 
       { (props.authState.isAuthenticated) ? (
         <>
-          { (props.navState.on === 'profile') ? (null) : (<button className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPath() } }>Profile</button>) }
-          <button className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPath() } }>Journal</button>
-          <button className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPath() } }>Write a New Entry</button>
-          <button className="navbar-btn" onClick={ () => { props.logOut() } }> Log Out </button>
+          { (props.navState.on === 'profile') ? (null) : (<div className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPath() } }>Profile</div>) }
+          <div className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPath() } }>Journal</div>
+          <div className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPath() } }>New Entry</div>
+          <div className="navbar-btn logout" onClick={ () => { props.logOut() } }> Log Out </div>
         </>
       ) : (
         <>
