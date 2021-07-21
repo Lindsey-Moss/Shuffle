@@ -125,7 +125,7 @@ form {
 .profile-column{
   height: 100%;
   width: 70%;
-  min-width: 450px;
+  min-width: 480px;
   height: 100%;
   margin: 0;
   background-color: white;
@@ -365,6 +365,7 @@ form {
 
 /* ---- JOURNAL ---- */
 .journal-page{
+  height: 96.5vh;
   background-image: url('https://www.wallpaperbetter.com/wallpaper/152/302/393/minimalism-gradient-2K-wallpaper-middle-size.jpg');
   background-size: cover;
   background-repeat: none;
@@ -373,7 +374,7 @@ form {
 .journal-main {
   display: flex;
   flex-flow: column-reverse;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -432,7 +433,7 @@ form {
   border: none;
   width: 100%;
   padding: 0.5em 0;
-  font-size: 1.8em;
+  font-size: 1.5em;
   background-color: transparent;
   transition: background-color ease-in-out 0.2s,
   color ease-in-out 0.2s;
@@ -440,13 +441,13 @@ form {
   text-align: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
   cursor: pointer;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 .navbar-btn:hover {
-  margin:0.906em 0;
+  margin:0.77em 0;
   padding: 0.35em 0;
   font-family: 'crookedregular',serif;
-  font-size: 2em;
+  font-size: 1.8em;
   background-color: wheat;
   color:#4b413a;
 }

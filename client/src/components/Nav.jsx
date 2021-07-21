@@ -51,7 +51,7 @@ const Nav = (props) => {
 
       { (props.authState.isAuthenticated) ? (
         <>
-          { (props.navState.on === 'profile') ? (null) : (<div className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPath() } }>Profile</div>) }
+          <div className="navbar-btn" onClick={ () => { props.history.push('/profile'); checkPath() } }>Profile</div>
           <div className="navbar-btn" onClick={ () => { props.history.push('/journal'); checkPath() } }>Journal</div>
           <div className="navbar-btn" onClick={ () => { props.setFrom('nav'); props.history.push('/journal/new'); checkPath() } }>New Entry</div>
           <div className="navbar-btn logout" onClick={ () => { props.logOut() } }> Log Out </div>
