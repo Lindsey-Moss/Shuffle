@@ -39,7 +39,9 @@ const DailyDraw = (props) => {
 
   const showCard = async () => {
     let reveal = document.querySelector('.daily-reveal')
-    reveal.style.display = 'block'
+    let thisButton = document.querySelector('.show-reading-btn')
+    reveal.style.display = 'flex'
+    thisButton.style.display = 'none'
     if(props.authState.thisUser){
       let reading = props.tarotState.theDaily.cardName
       if(!props.tarotState.dailyCardUpright){
@@ -87,25 +89,34 @@ const DailyDraw = (props) => {
       <main className="dailydraw-main">
 
       {(props.tarotState.dailyDeck) ? (null):(
-        props.tarotState.allDecks.map((deck) => {
+        
+        <div className="deck-options">
+          <h1>Which deck would you like for your drawing today?</h1>
+          {props.tarotState.allDecks.map((deck) => {
           return <DeckSummary deck={deck} setDeck={props.setDeck} key={deck.deckID}/>
-        })
+        })}
+
+        </div>
       )}
 
       {(props.tarotState.dailyDeck &&!(props.tarotState.theDaily)) ? (
-        <button className="shufflebtn" onClick={()=>{props.setDaily()}}>Shuffle the Deck</button>
+        <button className="shufflebtn" style={{position:"fixed",top:"40%"}} onClick={()=>{props.setDaily()}}>Shuffle the Deck</button>
         ):(null)}
 
-      {(props.tarotState.theDaily) ? (<button onClick={()=>{showCard()}}>Show My Card</button>):(null)}
+      {(props.tarotState.theDaily) ? (<button className="show-reading-btn" onClick={()=>{showCard()}}>Show My Card</button>):(null)}
 
       
 
       {(props.tarotState.theDaily) ? (
         <div className="daily-reveal">
-        <img src={(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.frontImage):(props.tarotState.theDaily.frontImageInv)} alt={props.tarotState.cardName}/>
-        <h3>{props.tarotState.theDaily.cardName}{(props.tarotState.dailyCardUpright) ? (null):(<span style={{fontStyle:"italic"}}> - Inverted</span>)}</h3>
-        <p>{(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.cardUpDef) : (props.tarotState.theDaily.cardInvDef)}</p>
-        <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
+          <div className="daily-card">
+            <img src={(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.frontImage):(props.tarotState.theDaily.frontImageInv)} alt={props.tarotState.cardName}/>
+            <h3>{props.tarotState.theDaily.cardName}{(props.tarotState.dailyCardUpright) ? (null):(<span style={{fontStyle:"italic"}}> - Inverted</span>)}</h3>
+            <p>{(props.tarotState.dailyCardUpright) ? (props.tarotState.theDaily.cardUpDef) : (props.tarotState.theDaily.cardInvDef)}</p>
+          </div>
+          <div className="save-as-entry-button-box">
+            <button onClick={()=>{toJournal()}}>Save this draw as a journal entry</button>
+          </div>
       </div>
       ):(null)}
       

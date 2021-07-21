@@ -105,8 +105,8 @@ const Reading = (props) => {
             <p>{(index.position) ? (index.card.cardUpDef) : (index.card.cardInvDef)}</p>
             </div>
           })}
-          <div style={{width:"100%"}}>
-            <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
+          <div className="save-as-entry-button-box">
+            <button onClick={()=>{toJournal()}}>Save this reading as a journal entry</button>
           </div>
       </div>
       ):(null)}
