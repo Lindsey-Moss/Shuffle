@@ -59,12 +59,16 @@ const Reading = (props) => {
       <div>{/*spacer for navbar*/}</div>
 
       <main className="reading-main">
-      This is where you can get a reading, whenever
 
       {(props.tarotState.thisDeck) ? (null):(
-        props.tarotState.allDecks.map((deck) => {
+        
+        <div className="deck-options">
+          
+          {props.tarotState.allDecks.map((deck) => {
           return <DeckSummary deck={deck} setDeck={props.setDeck} key={deck.deckID}/>
-        })
+        })}
+
+        </div>
       )}
 
       {(props.tarotState.thisDeck &&!(props.tarotState.thisRead)) ? (

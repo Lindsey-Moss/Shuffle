@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { UpdateUserAction, UserFormField, DeleteUserAction } from '../store/actions/UserActions'
+import {
+  UpdateUserAction,
+  UserFormField
+} from '../store/actions/UserActions'
 
 
 const mapStateToProps = ({ userState, authState }) => {
@@ -254,10 +257,12 @@ const ProfileDetails = (props) => {
   const toggleEdit = (e) => {
     e.preventDefault()
     let editarea = document.querySelector('.profile-edit-user')
+    let aboutarea = document.querySelector('.profile-about-box')
     let startEdit = document.querySelector('.profile-editbtn')
     let endEdit = document.querySelector('.profile-editbtn-off')
     let submit = document.querySelector('.profile-editbtn-submit')
     if (editarea.classList.contains('hide-form')) {
+      aboutarea.style.display = 'none'
       editarea.classList.remove('hide-form')
       editarea.classList.add('show-form')
       startEdit.classList.remove('show-button')
@@ -267,6 +272,7 @@ const ProfileDetails = (props) => {
       submit.classList.add('show-button')
       submit.classList.add('show-button')
     } else if (editarea.classList.contains('show-form')) {
+      aboutarea.style.display = 'block'
       editarea.classList.add('hide-form')
       editarea.classList.remove('show-form')
       startEdit.classList.add('show-button')
@@ -374,11 +380,10 @@ const ProfileDetails = (props) => {
             maxLength="2000"
             onChange={ handleChange }
           />
-          <div>
-            <button className="profile-editbtn-submit hide-button" onClick={ handleSubmitUpdate }>Submit Changes</button>
-          </div>
         </form>
-
+        <div className="profile-details-submit-btn-box">
+          <button className="profile-editbtn-submit hide-button" onClick={ handleSubmitUpdate }>Submit Changes</button>
+        </div>
       </div>
     </>
 

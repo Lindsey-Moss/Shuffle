@@ -1,10 +1,29 @@
+@font-face {
+  font-family: 'ogiremaregular';
+  src: url('../styles/ogirema-webfont.woff2') format('woff2'),
+       url('../styles/ogirema-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'crookedregular';
+  src: url('../styles/crooked-webfont.woff2') format('woff2'),
+       url('../styles/crooked-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
 body {
   margin: 0;
   padding: 0;
+  font-family:'ogiremaregular',sans-serif;
 }
 
 button {
   cursor: pointer;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 form {
   display:flex;
@@ -12,7 +31,6 @@ form {
   justify-content: flex-start;
   align-items: flex-start;
 }
-
 /*////////////////////////////*/
 /* ---------- PAGES ----------*/
 /*////////////////////////////*/
@@ -85,7 +103,10 @@ form {
 
 .profile-page {
   height: 100vh;
-  background-color: mediumseagreen;
+  background-image: url('https://www.wallpaperbetter.com/wallpaper/152/302/393/minimalism-gradient-2K-wallpaper-middle-size.jpg');
+  background-size: cover;
+  background-repeat: none;
+  background-attachment:fixed;
   padding: 0;
 }
 .profile-main {
@@ -93,6 +114,7 @@ form {
   width: 100%;
   display: flex;
   justify-content: center;
+  overflow-y:auto;
 }
 
 .delete-user-btn {
@@ -106,13 +128,13 @@ form {
   height: 100%;
   margin: 0;
   background-color: white;
-  display:flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
+  display:grid;
+  grid-template-rows: 18% 8% 74%;
 }
 
 .profile-top{
   z-index:2;
+  min-height: 100px;
   width: 100%;
   display: grid;
   grid-template-columns: 20% 80%;
@@ -141,6 +163,7 @@ form {
   border: 4px solid white;
   border-radius: 50%;
   background-color: white;
+  box-shadow: rgba(34, 14, 44, 0.2) 0 4px 6px;
 }
 
 .profile-image{
@@ -162,36 +185,76 @@ form {
   max-width: 70%;
   min-width: 350px;
   margin: 0 0 0 15px;
-  padding: 0;
+  padding: 0 0.15em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.profile-titlecard h3 {
+  padding: 0 0.4em;
+}
 
 .profile-detail-box{
+  min-height: 20px;
   margin: 0.3em 0;
   padding: 1.5em 0;
-  background-color: lightgray;
+  background-color: rgb(226, 226, 226);
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 1em;
   justify-items: center;
   align-items: center;
+  border: 0.5px solid rgba(49, 16, 71, 0.05);
+  box-shadow: rgba(20, 8, 26, 0.3) 0 4px 6px;
 }
 
 .profile-editbtn-box {
-  margin-left: 10px;
+  margin-left: 1em;
   width: 108px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.profile-editbtn {
+.profile-editbtn, .profile-editbtn-submit, .profile-editbtn-off {
   margin-top: 1em;
+  border: none;
+  padding: 3px 7px;
+  letter-spacing:0.03em;
+  color: #3f3a4b;
+  border-radius: 2px;
+  box-shadow: rgba(37, 15, 48, 0.4) 0 4px ;
+}
+.profile-editbtn:hover{
+  margin-top:1.2em;
+  box-shadow: rgba(37, 15, 48, 0.3) 0 2px ;
+}
+.profile-editbtn-off{
+  color: #4b413a;
+  background-color: rgb(255, 228, 211);
+  box-shadow: rgba(66, 39, 20, 0.4) 0 4px ;
+}
+.profile-editbtn-off:hover{
+  margin-top:1.2em;
+  box-shadow: rgba(66, 39, 20, 0.3) 0 2px ;
+}
+.profile-editbtn-submit{
+  color: white;
+  font-size: 2em;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 3px rgb(117, 63, 106);
+  background-color: rgb(236, 173, 217);
+  box-shadow: rgba(43, 11, 35, 0.5) 0 4px ;
+}
+.profile-editbtn-submit:hover{
+  margin-top:1.2em;
+  box-shadow: rgba(43, 11, 35, 0.4) 0 2px ;
 }
 
 .profile-details h6 {
   padding: 0;
   margin: 0 2em 0 0;
+  font-size: 0.75em;
   text-align: right;
   justify-self: end;
   font-weight: normal;
@@ -202,9 +265,18 @@ form {
 }
 
 .profile-about-box {
-  margin: 0.3em 0;
-  padding: 1.5em 0.5em;
-  background-color: lightgray;
+  display: block;
+  min-height: 450px;
+  margin: 2.25em 1em 1.5em 1em;
+  padding: 1em;
+  background-color: rgb(226, 226, 226);
+  box-shadow: rgba(20, 8, 26, 0.35) 0 5px 6px;
+  border: 0.5px solid rgba(49, 16, 71, 0.05);
+}
+.profile-about-box h2{
+  margin-top: -1.8em;
+  font-family: 'crookedregular';
+  letter-spacing: 0.25em;
 }
 .profile-nobio {
   font-style: italic;
@@ -212,6 +284,8 @@ form {
 }
 
 /* */
+
+/* ///////////////////////////// */
 
 /* ---- DAILY DRAW ---- */
 .shufflebtn {
@@ -221,6 +295,7 @@ form {
   display: none
 }
 
+
 /* */
 
 /* ---- READING ---- */
@@ -229,7 +304,12 @@ form {
   display: none
 }
 
+
+
+/* ///////////////////////////// */
+
 /* */
+
 
 /* ---- JOURNAL ---- */
 
@@ -307,9 +387,22 @@ form {
   padding: 0.5em;
 }
 
+.entry-card h3 {
+  
+}
+
+.entry-card img {
+  
+}
+
 .entry-card-button-box {
   position:absolute;
   align-self:flex-end;
+}
+
+.delete-entry-btn, .edit-entry-btn {
+  border: none;
+  background-color: transparent;
 }
 
 /* */
@@ -345,11 +438,8 @@ form {
 .profile-edit-user {
   display: none;
   padding: 1em;
-  height:40%;
   overflow: auto;
-  margin-bottom: 1em;
-  border-top:darkgrey 1px dashed;
-  border-bottom:darkgrey 1px dashed;
+  margin: 1.7em 0 1em 0;
 }
 
 .profile-edit-user-form {
@@ -357,7 +447,7 @@ form {
   grid-template-columns: 25% 75%;
   grid-template-rows: repeat(8, 50px);
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: 9em;
 }
 
 .profile-edit-user-form h6, input, select, textarea {
@@ -380,6 +470,53 @@ form {
 }
 .show-button{
   display:inline;
+}
+.profile-details-submit-btn-box{
+  height: 50px;
+  width: 100%;
+  text-align: center;
+}
+.profile-editbtn-submit {
+  padding: 6px 12px;
+  font-size: 0.8em;
+}
+
+/* */
+
+/* ---- DECK SUMMARY ---- */
+.deck-summary-card{
+  width: 30%;
+  margin: 0.5em;
+  border: 3px solid red;
+  height: 300px;
+  display: grid;
+  grid-template-rows: 10% 90%;
+}
+
+.deck-summary-header {
+  text-align: center;
+  margin: 0;
+  padding: 0.5em 0;
+}
+
+.deck-summary-box{
+  display: flex;
+}
+.deck-image-box {
+  padding: 0.5em;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.deck-image-box img {
+  width: 100%;
+  height: 100%;
+}
+.deck-summary-box p{
+  padding: 0 0.5em 0 0;
+  text-align: justify;
 }
 
 /* */

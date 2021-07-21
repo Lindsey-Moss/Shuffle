@@ -82,7 +82,7 @@ const Entry = (props) => {
         </form>
       ) : (
         <>
-          <h3><img src={ props.entry.entryIcon } alt={ props.entry.entryIcon } />{ props.entry.entryTitle }</h3>
+          <h3><img src={ props.entry.entryIcon } alt="" />{ props.entry.entryTitle }</h3>
           { (props.entry.read && (props.entry.read[0] !== '')) ? (
             <ul>{ props.entry.read.map((card, index) => {
               return <li key={ index }>{ card }</li>
