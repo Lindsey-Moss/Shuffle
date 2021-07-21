@@ -30,35 +30,51 @@ Whether to face the day with a clear perspective using a "daily draw" first thin
 ### ***Technologies***
 * HTML
 * CSS
-* JavaScript w/ React.js
-* Express
+* JavaScript w/ React.js and Redux
+* Express w/ Redux Thunk
 * PostgreSQL 
 
 ***
 
 ### ***Getting Started***
-##### Loading the URL will take you to the home page, where you can choose to have a one-card "daily draw", or a multi-card spread for a more detailed reading. By signing up, users can save their readings and create journal entries for future review.
+##### Loading the URL will take you to the home page, where you can choose to have a one-card "daily draw", or a multi-card spread for a more detailed reading. The app can be used for tarot readings without ever making an account, but by signing up, users can save their readings and create journal entries for future review.
 ##### A Trello board was used to track the progress of this application and can be viewed [here](https://trello.com/b/wXVjishL).
 ##### The project has been deployed on Heroku and can be viewed [here](X).
 ***
 
 ### ***Screenshots***
 
-##### TBD
-![tbd](x)
+##### Collapsible navbar and multi-card reading
+![View of a multi-card read with option to save as a journal entry](../Shuffle/client/assets/shuffle-reading-page.png)
 
-##### TBD
-![tbd](x)
+##### A calming place to record your thoughts
+![View of form for writing a new entry](../Shuffle/client/assets/shuffle-new-entry-page.png)
+
+##### Past journal entries can be reviewed and edited
+![View of multiple entries in the journal](../Shuffle/client/assets/shuffle-journal-view.png)
 ***
 
 ### ***Future Updates***
-- [ ] tbd
+- [ ] Enforce "once a day" for daily draw readings
+- [ ] Improved mobile optimization
+- [ ] Custom images for better "tagging"/icons on entries for organization and filtering
+- [ ] Ability to filter search through journal entries
+- [ ] Entries are viewed collapsed/stacked in journal and can be expanded to be read
+- [ ] Date/calendar sort/search for journal page
+- [ ] Cards can be "played" face down and can be clicked to be flipped right side up
+- [ ] Delete user functionality
+- [ ] Homepage to feature a tarot deck, artist, or resource; rotating on a regular basis
+- [ ] Verify email address functionality on registering a new user
+- [ ] Get permission from more artists to use their tarot decks in the app
+- [ ] Journal entries maintain "enters"/breaks on save. Better yet, the new entry form accepts markdown language and it is rendered that way again in the journal.
+- [ ] Click to reveal one card of a reading at a time.
+- [ ] Multiple spread layout options.
 
 ***
 
 ### ***Credits***
 
-TBA
-<!-- **Fonts:** [Google Fonts: Mukta and Flamenco](https://fonts.google.com/), [Century Gothic](https://www.cufonfonts.com/font/century-gothic)
 
-**Listing Data:** [Search Tiny House Villages](https://searchtinyhousevillages.com/) -->
+**Fonts:** [DaFont.com: Crooked and Ogirema](https://www.dafont.com)
+
+**Tarot Data:** [Brady Tarot](https://bradytarot.com/) & [Lady Tarot](https://www.kickstarter.com/projects/novaandmali/lady-tarot-cards-lgbt-and-poc-inclusive-tarot-deck/description)

@@ -71,7 +71,6 @@ const GetDailyDrawToday = async (req, res) => {
     let end = new Date()
     start.setHours(-4,0,0,0);
     end.setHours(19,59,59,999)
-    console.log('start: ',start,', and end: ',end)
     let matchingEntries = await Entry.findAll({
       where: { 
         userID: userID, 
