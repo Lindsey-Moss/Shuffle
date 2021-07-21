@@ -10,6 +10,7 @@ import {
   SetFrom,
   ToggleNav 
 } from '../store/actions/NavActions'
+import video from '../styles/purple-dust.mp4'
 
 const mapStateToProps = ({ journalState, authState, navState }) => {
   return { journalState, authState, navState }
@@ -88,11 +89,14 @@ const NewEntry = (props) => {
 
   return (
     <>
+    <div className="video-bg"><video id='videoBG' autoPlay loop muted>
+    <source src={video} type='video/mp4' alt='Your browser does not support the video tag.'/>
+  </video></div>
     {props.authState.isAuthenticated ? (
       <div className="newentry-page leave-room-for-jesus-i-mean-navbar">
         <div>{/*spacer for navbar*/}</div>
         <main>
-        This is where you can make a new journal entry
+        
         <div className="newentry-form-wrapper">
           <form className="newentry-form">
             {(props.journalState.read && (props.navState.from !=='nav')) ? (
@@ -112,8 +116,6 @@ const NewEntry = (props) => {
               placeholder="entry title"
             />
             <textarea
-            cols="50"
-            rows="20"
             name="entryBody"
             value={props.journalState.entryBody}
             onChange={handleChange}

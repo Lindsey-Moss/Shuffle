@@ -34,7 +34,9 @@ const Reading = (props) => {
 
   const showRead= () => {
     let reveal = document.querySelector('.read-reveal')
-    reveal.style.display = 'block'
+    let thisButton = document.querySelector('.show-reading-btn')
+    reveal.style.display = 'flex'
+    thisButton.style.display = 'none'
   }
 
   const toJournal = () => {
@@ -103,8 +105,9 @@ const Reading = (props) => {
             <p>{(index.position) ? (index.card.cardUpDef) : (index.card.cardInvDef)}</p>
             </div>
           })}
-          
-          <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
+          <div style={{width:"100%"}}>
+            <button onClick={()=>{toJournal()}}>Save this draw as a journal entry?</button>
+          </div>
       </div>
       ):(null)}
       
