@@ -45,13 +45,13 @@ Whether to face the day with a clear perspective using a "daily draw" first thin
 ### ***Screenshots***
 
 ##### Collapsible navbar and multi-card reading
-![View of a multi-card read with option to save as a journal entry](../Shuffle/client/assets/shuffle-reading-page.png)
+![View of a multi-card read with option to save as a journal entry](https://i.imgur.com/fkHtIhm.png)
 
 ##### A calming place to record your thoughts
-![View of form for writing a new entry](../Shuffle/client/assets/shuffle-new-entry-page.png)
+![View of form for writing a new entry](https://i.imgur.com/y4mX81e.png)
 
 ##### Past journal entries can be reviewed and edited
-![View of multiple entries in the journal](../Shuffle/client/assets/shuffle-journal-view.png)
+![View of multiple entries in the journal](https://i.imgur.com/0Udetna.png)
 ***
 
 ### ***Future Updates***
