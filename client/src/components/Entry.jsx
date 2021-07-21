@@ -26,6 +26,7 @@ const Entry = (props) => {
   return (
 
     <div className="entry-card">
+      <h4>{ changeDate(props.entry.createdAt) }</h4>
       <div className="entry-card-button-box">
         { (props.journalState.editing && (props.journalState.editingEntry.id === props.entry.id)) ? (
           <>
@@ -48,7 +49,7 @@ const Entry = (props) => {
 
       </div>
       { (props.journalState.editing && (props.journalState.editingEntry.id === props.entry.id)) ? (
-        <form>
+        <form className="edit-entry-form">
           { (props.entry.read ? (<input
             type="text"
             name="read"
@@ -62,7 +63,6 @@ const Entry = (props) => {
             onChange={ props.handleChange }
           />
           <textarea
-            cols="50"
             rows="20"
             name="entryBody"
             value={ props.journalState.editingEntry.entryBody }
@@ -83,14 +83,17 @@ const Entry = (props) => {
       ) : (
         <>
           <h3><img src={ props.entry.entryIcon } alt="" />{ props.entry.entryTitle }</h3>
+
           { (props.entry.read && (props.entry.read[0] !== '')) ? (
-            <ul>{ props.entry.read.map((card, index) => {
-              return <li key={ index }>{ card }</li>
-            }) }</ul>
+            <div className="entry-read-box" style={ { gridTemplateColumns: ((props.entry.read.length <= 3) ? ("50px 50%") : ("100px 50%")), gridTemplateRows: ((props.entry.read.length <= 3) ? ("65px") : ("100px")) } }>
+              <img src="https://i.imgur.com/XpKaRlW.png" className="" style={ { height: ((props.entry.read.length <= 3) ? ("60px") : ("")) } } />
+              <ul className="entry-read-list">{ props.entry.read.map((card, index) => {
+                return <li className="entry-read-card" key={ index }>{ card.replace('- inverted', '↕') } </li>
+              }) }</ul>
+            </div>
           ) : (
             null /* if there is no read info to show, then don't */
           ) }
-          <p> { changeDate(props.entry.createdAt) } </p>
           <p>{ props.entry.entryBody }</p>
         </>) }
     </div>

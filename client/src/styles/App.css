@@ -19,6 +19,7 @@ body {
   margin: 0;
   padding: 0;
   font-family:'ogiremaregular',sans-serif;
+  background-color: rgb(40, 36, 51);
 }
 
 button {
@@ -130,6 +131,7 @@ form {
   background-color: white;
   display:grid;
   grid-template-rows: 18% 8% 74%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 20px;
 }
 
 .profile-top{
@@ -289,16 +291,66 @@ form {
 
 /* ---- DAILY DRAW ---- */
 .shufflebtn {
-  display: inline-block
+  margin-top:2em;
+  font-size: 1.4em;
+  padding: 6px 20px;
+  letter-spacing: 0.1em;
+  border:none;
+  border-radius: 2px;
+  background-color: rgb(241, 221, 169);
+  box-shadow: rgb(114, 96, 37) 0 10px ;
+}
+.shufflebtn:hover {
+  margin-top:2.15em;
+  letter-spacing: normal;
+  font-family: 'crookedregular';
+  box-shadow: rgb(114, 96, 37) 0 5px ;
 }
 .daily-reveal {
   display: none
 }
+.deck-options{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.deck-options h1{
+  color: thistle;
+}
 
+.show-reading-btn{
+  position:fixed;
+  top:50%;
+  font-size: 1.4em;
+  padding: 6px 20px;
+  letter-spacing: 0.1em;
+  border:none;
+  border-radius: 2px;
+  background-color: rgb(241, 221, 169);
+  box-shadow: rgb(114, 96, 37) 0 10px ;
+}
+.show-reading-btn:hover{
+  margin-top:0.15em;
+  letter-spacing: normal;
+  font-family: 'crookedregular';
+  box-shadow: rgb(114, 96, 37) 0 5px ;
+}
 
 /* */
 
 /* ---- READING ---- */
+.reading-main{
+  width: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.reading-prompt h1{
+  text-align: center;
+  color:thistle
+}
 
 .read-reveal {
   display: none
@@ -312,10 +364,17 @@ form {
 
 
 /* ---- JOURNAL ---- */
-
+.journal-page{
+  background-image: url('https://www.wallpaperbetter.com/wallpaper/152/302/393/minimalism-gradient-2K-wallpaper-middle-size.jpg');
+  background-size: cover;
+  background-repeat: none;
+  background-attachment:fixed;
+}
 .journal-main {
   display: flex;
   flex-flow: column-reverse;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* */
@@ -377,22 +436,57 @@ form {
 /* ---- ENTRY ---- */
 
 .entry-card {
+  background-color: rgb(240, 237, 233);
+  width: 80%;
   display: flex;
   flex-flow: column wrap;
   text-align: justify;
   justify-content: flex-start;
   align-items: flex-start;
-  border: 2px dashed red;
   margin: 1em;
   padding: 0.5em;
+  border-radius: 3px;
 }
 
 .entry-card h3 {
-  
+  margin-bottom: 0;
+}
+.entry-card h4{
+  z-index:1;
+  margin: 0.2em 0.3em 0 0;
+  align-self: flex-end;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 4em;
+  font-family:'crookedregular',serif;
+  font-weight: normal;
+  user-select: none;
 }
 
-.entry-card img {
-  
+.entry-read-box {
+  width: 98%;
+  display: grid;
+  grid-template-columns: 100px 50%;
+  grid-template-rows: 100px;
+  justify-items: start;
+  margin:0.75em 0;
+  font-size: 0.9em;
+  overflow: hidden;
+}
+.entry-read-box img {
+  margin-left:0.5em;
+  height: 100%;
+}
+.entry-read-list {
+  height: 100px;
+  column-count: 1;
+  column-gap:0.5em;
+  min-width: 120px;
+}
+.entry-read-card {
+  /* list-style-type: "›  "; */
+  list-style: none;
+  line-height: 120%;
 }
 
 .entry-card-button-box {
@@ -403,6 +497,25 @@ form {
 .delete-entry-btn, .edit-entry-btn {
   border: none;
   background-color: transparent;
+}
+.edit-entry-form {
+  z-index:2;
+  width: 86%;
+}
+.edit-entry-form input {
+  width: 100%;
+}
+.edit-entry-form textarea {
+  resize: none;
+  width: 112%;
+}
+.edit-entry-form select {
+  padding: 6px 12px;
+}
+.edit-entry-form button {
+  align-self: center;
+  padding: 6px 15px;
+  margin-bottom:0.75em;
 }
 
 /* */
@@ -485,38 +598,44 @@ form {
 
 /* ---- DECK SUMMARY ---- */
 .deck-summary-card{
-  width: 30%;
-  margin: 0.5em;
-  border: 3px solid red;
-  height: 300px;
+  color: rgb(241, 224, 241);
+  width: 70%;
+  margin: 0.5em 0.5em 2em 0.5em;
+  padding: 0 1em;
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 13% 87%;
+  border-radius: 8px;
+  border: 2px dotted #3f3a4b;
+  box-shadow: #3f3a4b 0 0 20px;
 }
 
 .deck-summary-header {
   text-align: center;
   margin: 0;
   padding: 0.5em 0;
+  font-family: 'crookedregular';
+  letter-spacing: 0.3em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.deck-summary-wrapper {
+  width: 100%;
+  display: flex;
 }
 
-.deck-summary-box{
-  display: flex;
-}
-.deck-image-box {
+.deck-image {
+  width: 150px;
   padding: 0.5em;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-.deck-image-box img {
-  width: 100%;
-  height: 100%;
+  cursor: pointer;
+  border-radius: 16px;
 }
 .deck-summary-box p{
-  padding: 0 0.5em 0 0;
+  padding: 0 1em 0.5em 1em;
   text-align: justify;
+}
+summary{
+  margin-left:0.5em;
+  cursor: pointer;
 }
 
 /* */

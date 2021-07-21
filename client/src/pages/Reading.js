@@ -63,7 +63,7 @@ const Reading = (props) => {
       {(props.tarotState.thisDeck) ? (null):(
         
         <div className="deck-options">
-          
+          <h1>Which deck would you like for your reading?</h1>
           {props.tarotState.allDecks.map((deck) => {
           return <DeckSummary deck={deck} setDeck={props.setDeck} key={deck.deckID}/>
         })}
@@ -72,22 +72,25 @@ const Reading = (props) => {
       )}
 
       {(props.tarotState.thisDeck &&!(props.tarotState.thisRead)) ? (
-        <div>
-          <h4>How many cards for this reading?
+        <div className="reading-prompt">
+          <h1>How many cards for this reading?</h1>
             <form>
               <input
+                style={{alignSelf:"center",fontSize:"1em",textAlign:"center",padding:"0.5em 0"}}
                 id="numberOfCards"
                 type="number"
+                defaultValue="1"
                 min="1"
                 max="12"
               />
             </form>
-          </h4>
-          <button className="shufflebtn" onClick={()=>{props.setRead((document.getElementById("numberOfCards").value))}}>Shuffle the Deck</button>
+          <div style={{textAlign:"center"}}>
+            <button className="shufflebtn" onClick={()=>{props.setRead((document.getElementById("numberOfCards").value))}}>Shuffle the Deck</button>
+          </div>
         </div>
         ):(null)}
 
-      {(props.tarotState.thisRead) ? (<button onClick={()=>{showRead()}}>Show My Read</button>):(null)}
+      {(props.tarotState.thisRead) ? (<button className="show-reading-btn" onClick={()=>{showRead()}}>Show My Read</button>):(null)}
 
       
 
