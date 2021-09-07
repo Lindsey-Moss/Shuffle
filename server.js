@@ -3,6 +3,7 @@ const cors = require('cors')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const app = express()
+const path = require('path')
 
 const AppRouter = require('./routes/AppRouter')
 const PORT = process.env.PORT || 3001
@@ -13,5 +14,13 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => res.json({ message: 'Server is working!' }))
 app.use('/api', AppRouter)
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')))
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(`${__dirname}/client/build/index.html`))
+  })
+}
+
 
 app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))
