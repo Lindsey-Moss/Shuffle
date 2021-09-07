@@ -12,15 +12,23 @@ app.use(cors())
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => res.json({ message: 'Server is working!' }))
 app.use('/api', AppRouter)
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')))
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(`${__dirname}/client/build/index.html`))
-  })
-}
+// List of all the files that should be served as-is
+let protected = ['App.css', 'favicon.ico']
+
+app.get("*", (req, res) => {
+
+  let path = req.params['0'].substring(1)
+
+  if (protected.includes(path)) {
+    // Return the actual file
+    res.sendFile(`${__dirname}/build/${path}`);
+  } else {
+    // Otherwise, redirect to /build/index.html
+    res.sendFile(`${__dirname}/build/index.html`);
+  }
+});
 
 
 app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))
